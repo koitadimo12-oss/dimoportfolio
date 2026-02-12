@@ -1,0 +1,3 @@
+[submodule "projets/jeux_web"]
+	path = projets/jeux_web
+	url = https://github.com/koitadimo12-oss/jeux_web.git

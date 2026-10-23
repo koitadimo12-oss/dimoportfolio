@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -7,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio de Abdou Wahab Koita, développeur Full Stack junior">
+  <meta name="theme-color" content="#061F20">
   <link rel="manifest" href="manifest.json">
 
   <title>Portfolio – Abdou Wahab Koita</title>
@@ -14,72 +14,180 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
+    :root {
+      --bg: #061F20;
+      --bg2: #0A2C2B;
+      --petrol: #073B3A;
+      --copper: #D47745;
+      --copper-h: #E08A5C;
+      --mint: #8ED6C5;
+      --cream: #F2EFE9;
+      --muted: #B7C9C3;
+      --line: rgba(142, 214, 197, .16);
     }
 
-    body {
-      overflow-x: hidden;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+    body { background: var(--bg); color: var(--muted); overflow-x: hidden; }
+    img { max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+
+    /* Sections */
+    .bg-a { background: var(--bg); --card: var(--bg2); }
+    .bg-b { background: var(--bg2); --card: var(--bg); }
+    .sec { padding: 3.5rem 1rem; }
+    .wrap { max-width: 72rem; margin: 0 auto; }
+    .head { text-align: center; margin-bottom: 2.25rem; }
+    .eyebrow { color: var(--mint); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .h2 { color: var(--cream); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.4rem); margin-top: .4rem; line-height: 1.2; }
+    .t { color: var(--cream); }
+    .m { color: var(--mint); }
+    .mu { color: var(--muted); }
+    .cu { color: var(--copper); }
 
     .gradient-text {
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      background: linear-gradient(90deg, var(--mint), var(--cream));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
+    /* Cartes */
     .card {
+      background: var(--card, var(--bg2));
+      border: 1px solid var(--line);
+      border-radius: 1rem;
       transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
     }
-
     .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(56, 189, 248, .45);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
+      transform: translateY(-4px);
+      border-color: rgba(142, 214, 197, .4);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .3);
     }
+    .static-card { background: var(--card, var(--bg2)); border: 1px solid var(--line); border-radius: 1rem; }
 
-    .project-img {
-      transition: transform .5s ease;
-    }
-
-    .project-card:hover .project-img {
-      transform: scale(1.06);
-    }
+    .project-img { transition: transform .5s ease; }
+    .project-card:hover .project-img { transform: scale(1.05); }
 
     .skill-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: .9rem;
+      padding: 1rem;
+      text-align: center;
       transition: transform .25s ease, border-color .25s ease;
     }
+    .skill-card:hover { transform: translateY(-4px); border-color: var(--mint); }
+    .skill-card p { color: var(--muted); font-size: .875rem; margin-top: .5rem; }
 
-    .skill-card:hover {
-      transform: translateY(-5px);
-      border-color: #38bdf8;
+    /* Boutons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: .6rem 1.25rem;
+      border-radius: 999px; font-weight: 700; font-size: .875rem; text-align: center;
+      cursor: pointer; transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+    }
+    .btn-p { background: var(--copper); color: var(--bg); border: 1px solid var(--copper); }
+    .btn-p:hover { background: var(--copper-h); border-color: var(--copper-h); transform: translateY(-2px); }
+    .btn-g { border: 1px solid rgba(142, 214, 197, .35); color: var(--cream); background: transparent; }
+    .btn-g:hover { border-color: var(--mint); color: var(--mint); background: rgba(142, 214, 197, .08); }
+    .btn-sm { border-radius: .6rem; min-height: 42px; padding: .5rem .75rem; font-size: .8rem; }
+
+    /* Badges */
+    .chip {
+      display: inline-block; padding: .2rem .7rem; border-radius: 999px; font-size: .75rem; line-height: 1.4;
+      background: rgba(142, 214, 197, .1); color: var(--mint); border: 1px solid rgba(142, 214, 197, .22);
+    }
+    .chip-n { background: rgba(242, 239, 233, .06); color: var(--muted); border-color: var(--line); }
+    .tag-a, .tag-p {
+      position: absolute; top: .75rem; left: .75rem; padding: .2rem .65rem; border-radius: 999px;
+      font-size: .75rem; font-weight: 600; background: rgba(6, 31, 32, .88);
+    }
+    .tag-a { color: var(--mint); border: 1px solid rgba(142, 214, 197, .35); }
+    .tag-p { color: var(--cream); border: 1px solid rgba(212, 119, 69, .55); }
+    .live {
+      display: inline-flex; align-items: center; gap: .35rem; padding: .2rem .65rem; border-radius: 999px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .05em;
+      color: var(--copper); background: rgba(212, 119, 69, .12); border: 1px solid rgba(212, 119, 69, .45);
+    }
+    .live::before { content: ""; width: .4rem; height: .4rem; border-radius: 50%; background: var(--copper); }
+    .year {
+      display: inline-block; padding: .2rem .65rem; border-radius: 999px; font-size: .75rem; font-weight: 700;
+      background: rgba(142, 214, 197, .1); color: var(--mint); border: 1px solid rgba(142, 214, 197, .22);
+    }
+
+    /* Expériences */
+    .exp-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; align-items: stretch; }
+    @media (min-width: 768px) { .exp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .exp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .exp { display: flex; flex-direction: column; padding: 1.4rem; min-width: 0; }
+    .exp h3 { color: var(--cream); font-size: 1.1rem; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+    .exp-top { display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+    .exp-co { display: inline-block; color: var(--mint); font-weight: 600; font-size: .9rem; margin-top: .35rem; }
+    .exp-co:hover { color: var(--cream); text-decoration: underline; }
+    .exp ul { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .5rem; font-size: .9rem; }
+    .exp li { display: flex; gap: .6rem; align-items: flex-start; }
+    .exp li::before { content: ""; flex: none; width: .4rem; height: .4rem; margin-top: .5rem; border-radius: 50%; background: var(--mint); }
+    .exp-foot { margin-top: auto; padding-top: 1.1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .exp-sub { color: var(--muted); font-size: .85rem; margin-top: .15rem; }
+
+    /* Formulaire */
+    .field {
+      width: 100%; background: var(--bg2); color: var(--cream);
+      border: 1px solid var(--line); border-radius: .6rem; padding: .8rem 1rem; outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .field::placeholder { color: #7F9A93; }
+    .field:focus { border-color: var(--mint); box-shadow: 0 0 0 3px rgba(142, 214, 197, .18); }
+
+    /* Navigation */
+    .nav-link { color: var(--muted); padding: .5rem .25rem; white-space: nowrap; transition: color .2s ease; }
+    .nav-link:hover { color: var(--mint); }
+    .nav-list { display: flex; align-items: center; gap: 1.25rem; font-size: .875rem; overflow-x: auto; scrollbar-width: none; }
+    .nav-list::-webkit-scrollbar { display: none; }
+
+    /* Réseaux */
+    .soc img { opacity: .75; transition: opacity .3s ease, transform .3s ease, filter .3s ease; }
+    .soc:hover img { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(142, 214, 197, .5)); }
+    .soc { transition: transform .3s ease; display: inline-flex; padding: .35rem; }
+    .soc:hover { transform: translateY(-3px); }
+
+    /* Application mobile */
+    .feat { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+    .feat li { display: flex; gap: .7rem; align-items: flex-start; }
+    .feat li::before { content: "✓"; flex: none; color: var(--mint); font-weight: 700; }
+    .phone-frame {
+      background: var(--petrol); border: 1px solid rgba(142, 214, 197, .3);
+      border-radius: 1.5rem; padding: .75rem; box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
 
 </head>
 
-<body class="bg-gray-950 text-gray-200">
+<body>
 
   <!-- ================= NAVBAR ================= -->
 
-  <header class="fixed top-0 left-0 w-full z-50 bg-gray-950/95 backdrop-blur-md border-b border-gray-800">
+  <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b" style="background: rgba(6,31,32,.94); border-color: var(--line);">
 
-    <nav class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row md:justify-between md:items-center gap-1 md:gap-6">
 
-      <a href="#acceuil" class="text-xl font-bold">
-        Abdou <span class="text-cyan-400">Wahab</span>
+      <a href="#acceuil" class="text-xl font-bold t">
+        Abdou <span class="m">Wahab</span>
       </a>
 
-      <ul class="hidden md:flex items-center gap-6 text-sm">
-        <li><a href="#acceuil" class="hover:text-cyan-400 transition">Accueil</a></li>
-        <li><a href="#apropos" class="hover:text-cyan-400 transition">À propos</a></li>
-        <li><a href="#formation" class="hover:text-cyan-400 transition">Formation</a></li>
-        <li><a href="#experience" class="hover:text-cyan-400 transition">Expérience</a></li>
-        <li><a href="#competences" class="hover:text-cyan-400 transition">Compétences</a></li>
-        <li><a href="#services" class="hover:text-cyan-400 transition">Services</a></li>
-        <li><a href="#projets" class="hover:text-cyan-400 transition">Projets</a></li>
-        <li><a href="#contact" class="hover:text-cyan-400 transition">Contact</a></li>
+      <ul class="nav-list">
+        <li><a href="#acceuil" class="nav-link">Accueil</a></li>
+        <li><a href="#apropos" class="nav-link">À propos</a></li>
+        <li><a href="#formation" class="nav-link">Formation</a></li>
+        <li><a href="#experience" class="nav-link">Expérience</a></li>
+        <li><a href="#competences" class="nav-link">Compétences</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#projets" class="nav-link">Projets</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
     </nav>
@@ -88,37 +196,28 @@
 
   <!-- ================= ACCUEIL ================= -->
 
-  <section id="acceuil" class="min-h-[80vh] pt-32 pb-16 px-4 flex items-center justify-center bg-gray-900">
+  <section id="acceuil" class="min-h-[80vh] pt-36 md:pt-32 pb-16 px-4 flex items-center justify-center bg-b">
 
     <div class="max-w-4xl mx-auto text-center">
 
-      <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-400 text-sm">
+      <span class="chip mb-4" style="padding:.4rem 1rem; font-size:.85rem;">
         Étudiant en Génie Informatique
       </span>
 
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-5">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold t leading-tight mb-5">
         Développeur
         <span class="gradient-text"> Full Stack Junior</span>
       </h1>
 
-      <p class="max-w-2xl mx-auto text-gray-400 text-base md:text-lg mb-8">
+      <p class="max-w-2xl mx-auto mu text-base md:text-lg mb-8">
         Je conçois des applications web modernes et je développe
         progressivement mes compétences à travers des projets académiques
         et personnels.
       </p>
 
       <div class="flex flex-wrap justify-center gap-3">
-
-        <a href="#projets"
-          class="bg-cyan-400 text-gray-950 px-6 py-3 rounded-full font-bold hover:bg-cyan-300 transition">
-          Voir mes projets
-        </a>
-
-        <a href="#contact"
-          class="border border-gray-700 px-6 py-3 rounded-full font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-          Me contacter
-        </a>
-
+        <a href="#projets" class="btn btn-p">Voir mes projets</a>
+        <a href="#contact" class="btn btn-g">Me contacter</a>
       </div>
 
     </div>
@@ -127,18 +226,13 @@
 
   <!-- ================= À PROPOS ================= -->
 
-  <section id="apropos" class="py-14 md:py-16 px-4 bg-gray-950">
+  <section id="apropos" class="sec bg-a">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="wrap">
 
-      <div class="text-center mb-9">
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Qui suis-je ?
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          À <span class="gradient-text">propos</span>
-        </h2>
+      <div class="head">
+        <span class="eyebrow">Qui suis-je ?</span>
+        <h2 class="h2">À <span class="gradient-text">propos</span></h2>
       </div>
 
       <div class="grid md:grid-cols-[280px_1fr] gap-8 items-center">
@@ -147,60 +241,44 @@
         <div class="flex flex-col items-center">
 
           <div class="relative">
-
-            <div class="absolute -inset-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 opacity-20 blur-lg"></div>
-
+            <div class="absolute -inset-2 rounded-full opacity-20 blur-lg" style="background: var(--mint);"></div>
             <img
               src="image_projet_et_moi/logo4.jpeg"
               alt="Abdou Wahab Koita"
-              class="relative w-52 h-52 md:w-60 md:h-60 object-cover rounded-full border-4 border-cyan-400/70 shadow-2xl">
+              class="relative w-52 h-52 md:w-60 md:h-60 object-cover rounded-full shadow-2xl"
+              style="border: 4px solid rgba(142,214,197,.6);">
           </div>
 
           <div class="text-center mt-5">
-
-            <h3 class="text-xl font-bold text-white">
-              Abdou Wahab Koita
-            </h3>
-
-            <p class="text-cyan-400 text-sm mt-1">
-              Développeur Full Stack Junior
-            </p>
-
-            <p class="text-gray-500 text-sm mt-1">
-              Étudiant en Licence 3
-            </p>
-
+            <h3 class="text-xl font-bold t">Abdou Wahab Koita</h3>
+            <p class="m text-sm mt-1">Développeur Full Stack Junior</p>
+            <p class="mu text-sm mt-1">Étudiant en Licence 3</p>
           </div>
 
         </div>
 
         <!-- TEXTE -->
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 md:p-8">
+        <div class="static-card p-6 md:p-8">
 
           <div class="flex items-center gap-3 mb-5">
 
-            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center text-cyan-400">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.1);">
               💻
             </div>
 
             <div>
-              <h3 class="text-xl font-bold text-white">
-                Développeur Full Stack junior
-              </h3>
-
-              <p class="text-gray-500 text-sm">
-                Passionné par le développement web
-              </p>
+              <h3 class="text-xl font-bold t">Développeur Full Stack junior</h3>
+              <p class="mu text-sm">Passionné par le développement web</p>
             </div>
 
           </div>
 
-          <div class="space-y-3 text-gray-300 leading-relaxed text-sm md:text-base">
+          <div class="space-y-3 leading-relaxed text-sm md:text-base">
 
             <p>
-              J’ai validé ma <strong class="text-white">Licence 2 en Génie Informatique</strong>
+              J’ai validé ma <strong class="t">Licence 2 en Génie Informatique</strong>
               à l’UNIPRO et je poursuis actuellement mon parcours en
-              <strong class="text-cyan-400">Licence 3</strong>.
+              <strong class="m">Licence 3</strong>.
             </p>
 
             <p>
@@ -212,7 +290,7 @@
 
             <p>
               Je travaille principalement avec
-              <strong class="text-white">React.js, TypeScript, Node.js, NestJS et MySQL</strong>.
+              <strong class="t">React.js, TypeScript, Node.js, NestJS et MySQL</strong>.
               J’accorde une attention particulière à la qualité du code,
               à l’expérience utilisateur et à la conception d’applications
               simples et efficaces.
@@ -228,27 +306,11 @@
 
           <!-- TECHNOLOGIES -->
           <div class="flex flex-wrap gap-2 mt-6">
-
-            <span class="px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-400 text-xs border border-cyan-400/20">
-              React.js
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-400 text-xs border border-cyan-400/20">
-              TypeScript
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-400 text-xs border border-cyan-400/20">
-              Node.js
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-400 text-xs border border-cyan-400/20">
-              NestJS
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-400 text-xs border border-cyan-400/20">
-              MySQL
-            </span>
-
+            <span class="chip">React.js</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">NestJS</span>
+            <span class="chip">MySQL</span>
           </div>
 
           <div class="mt-6 flex flex-wrap gap-3">
@@ -256,14 +318,15 @@
             <a
               href="https://www.sencampus.com/etablissement/unipro-dakar/"
               target="_blank"
-              class="px-5 py-2.5 rounded-full border border-gray-700 text-gray-300 text-sm font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
+              rel="noopener noreferrer"
+              class="btn btn-g">
               🎓 UNIPRO
             </a>
 
             <a
               href="mon_cv/CV Abdou.W.K.DEV.pdf"
               download
-              class="px-5 py-2.5 rounded-full bg-cyan-400 text-gray-950 text-sm font-bold hover:bg-cyan-300 transition">
+              class="btn btn-p">
               📄 Télécharger mon CV
             </a>
 
@@ -279,57 +342,34 @@
 
   <!-- ================= FORMATION ================= -->
 
-  <section id="formation" class="py-14 px-4 bg-gray-900">
+  <section id="formation" class="sec bg-b">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="wrap">
 
-      <div class="text-center mb-8">
-
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Mon parcours
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          Formation
-        </h2>
-
+      <div class="head" style="margin-bottom:2rem;">
+        <span class="eyebrow">Mon parcours</span>
+        <h2 class="h2">Formation</h2>
       </div>
 
       <div class="grid md:grid-cols-2 gap-5">
 
-        <div class="card bg-gray-950 border border-gray-800 rounded-2xl p-6">
-
-          <span class="text-xs text-gray-500">
-            2022 — 2024
-          </span>
-
-          <h3 class="text-xl font-bold text-cyan-400 mt-2">
-            Licence Géographie – UCAD
-          </h3>
-
-          <div class="mt-3 text-gray-400 text-sm space-y-1">
+        <div class="card p-6">
+          <span class="text-xs mu">2022 — 2024</span>
+          <h3 class="text-xl font-bold m mt-2">Licence Géographie – UCAD</h3>
+          <div class="mt-3 mu text-sm space-y-1">
             <p>Licence 1 : 2022 – 2023</p>
             <p>Licence 2 : 2023 – 2024</p>
           </div>
-
         </div>
 
-        <div class="card bg-gray-950 border border-gray-800 rounded-2xl p-6">
-
-          <span class="text-xs text-gray-500">
-            2024 — Aujourd’hui
-          </span>
-
-          <h3 class="text-xl font-bold text-cyan-400 mt-2">
-            Licence en Génie Informatique – UNIPRO
-          </h3>
-
-          <div class="mt-3 text-gray-400 text-sm space-y-1">
+        <div class="card p-6">
+          <span class="text-xs mu">2024 — Aujourd’hui</span>
+          <h3 class="text-xl font-bold m mt-2">Licence en Génie Informatique – UNIPRO</h3>
+          <div class="mt-3 mu text-sm space-y-1">
             <p>Licence 1 : 2024 – 2025</p>
             <p>Licence 2 : 2025 – 2026</p>
             <p>Licence 3 : en cours</p>
           </div>
-
         </div>
 
       </div>
@@ -340,144 +380,128 @@
 
   <!-- ================= EXPERIENCE ================= -->
 
-  <section id="experience" class="py-12 px-4 bg-gray-950">
+  <section id="experience" class="sec bg-a">
 
-    <div class="max-w-5xl mx-auto">
+    <div class="wrap">
 
-      <!-- TITRE -->
-      <div class="text-center mb-8">
-
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Mon expérience
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          Expérience
-        </h2>
-
+      <div class="head" style="margin-bottom:2rem;">
+        <span class="eyebrow">Mon expérience</span>
+        <h2 class="h2">Expérience</h2>
       </div>
 
-      <!-- ================= EXPERIENCES ================= -->
+      <div class="exp-grid">
 
-      <div class="grid md:grid-cols-2 gap-5">
+        <!-- ================= TGI 2026 ================= -->
 
-        <!-- ================= 2026 ================= -->
+        <article class="card exp">
 
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5
-                    hover:border-cyan-400/30 transition duration-300">
-
-          <div class="flex items-center gap-2 flex-wrap">
-
-            <span class="px-2.5 py-1 rounded-full
-                         bg-cyan-400/10 text-cyan-400
-                         border border-cyan-400/20
-                         text-xs font-bold">
-              2026
-            </span>
-
-            <h3 class="text-lg font-bold text-white">
-              Stagiaire Développeur
-            </h3>
-
+          <div class="exp-top">
+            <span class="year">2026</span>
           </div>
+
+          <h3>Développeur Web / Backend</h3>
 
           <a
             href="https://sn.africabz.com/dakar/tgi-entreprise-informatique-434313"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block text-cyan-400 text-sm font-semibold
-                   mt-2 hover:text-cyan-300 hover:underline">
+            class="exp-co">
             TGI ↗
           </a>
 
-          <p class="text-cyan-400 font-semibold text-sm mt-3 mb-3">
-            Développement Web & Backend
-          </p>
+          <p class="exp-sub">Développement Web &amp; Backend</p>
 
-          <ul class="space-y-1.5 text-sm text-gray-400">
-
-            <li class="flex items-start gap-2">
-              <span class="text-cyan-400">•</span>
-              <span>Conception d’une application complète.</span>
-            </li>
-
-            <li class="flex items-start gap-2">
-              <span class="text-cyan-400">•</span>
-              <span>Développement de l’interface avec React.js.</span>
-            </li>
-
-            <li class="flex items-start gap-2">
-              <span class="text-cyan-400">•</span>
-              <span>Développement de l’API avec NestJS.</span>
-            </li>
-
-            <li class="flex items-start gap-2">
-              <span class="text-cyan-400">•</span>
-              <span>MySQL et TypeORM pour la base de données.</span>
-            </li>
-
-            <li class="flex items-start gap-2">
-              <span class="text-cyan-400">•</span>
-              <span>Travail en équipe sur l’architecture.</span>
-            </li>
-
+          <ul>
+            <li><span>Développement d’interfaces avec React.js et TypeScript.</span></li>
+            <li><span>Conception et intégration d’API avec NestJS et Node.js.</span></li>
+            <li><span>Gestion des données avec MySQL et TypeORM.</span></li>
+            <li><span>Participation au développement et à l’organisation du code en équipe.</span></li>
           </ul>
 
-        </div>
-
-        <!-- ================= 2025 ================= -->
-
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5
-                    hover:border-purple-400/30 transition duration-300">
-
-          <div class="flex items-center gap-2 flex-wrap">
-
-            <span class="px-2.5 py-1 rounded-full
-                         bg-purple-400/10 text-purple-400
-                         border border-purple-400/20
-                         text-xs font-bold">
-              2025
-            </span>
-
-            <h3 class="text-lg font-bold text-white">
-              Stagiaire
-            </h3>
-
+          <div class="exp-foot">
+            <span class="chip">React.js</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">NestJS</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">TypeORM</span>
+            <span class="chip chip-n">API REST</span>
+            <span class="chip chip-n">Git</span>
+            <span class="chip chip-n">GitHub</span>
+            <span class="chip chip-n">Postman</span>
           </div>
+
+        </article>
+
+        <!-- ================= TGI 2025 ================= -->
+
+        <article class="card exp">
+
+          <div class="exp-top">
+            <span class="year">2025</span>
+          </div>
+
+          <h3>Stagiaire Support Informatique et Réseau</h3>
 
           <a
             href="https://sn.africabz.com/dakar/tgi-entreprise-informatique-434313"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block text-purple-400 text-sm font-semibold
-                   mt-2 hover:text-purple-300 hover:underline">
+            class="exp-co">
             TGI ↗
           </a>
 
-          <p class="text-purple-400 font-semibold text-sm mt-3 mb-3">
-            Support informatique & Réseau
-          </p>
+          <p class="exp-sub">Support informatique &amp; Réseau</p>
 
-          <ul class="space-y-1.5 text-sm text-gray-400">
-
-            <li class="flex items-start gap-2">
-              <span class="text-purple-400">•</span>
-              <span>Travaux de câblage et installation réseau.</span>
-            </li>
-
-            <li class="flex items-start gap-2">
-              <span class="text-purple-400">•</span>
-              <span>Assistance sur différentes tâches informatiques.</span>
-            </li>
-
-            <li class="flex items-start gap-2">
-              <span class="text-purple-400">•</span>
-              <span>Découverte de l’environnement professionnel.</span>
-            </li>
-
+          <ul>
+            <li><span>Installation et configuration de matériel informatique.</span></li>
+            <li><span>Participation au câblage et à l’installation réseau.</span></li>
+            <li><span>Assistance technique et dépannage de postes informatiques.</span></li>
           </ul>
 
-        </div>
+          <div class="exp-foot">
+            <span class="chip chip-n">Support</span>
+            <span class="chip chip-n">Réseau</span>
+            <span class="chip chip-n">Stage</span>
+          </div>
+
+        </article>
+
+        <!-- ================= BEN JEDDOU TECHNOLOGIES ================= -->
+
+        <article class="card exp" style="border-color: rgba(212,119,69,.35);">
+
+          <div class="exp-top">
+            <span class="year">2026–2027</span>
+            <span class="live">EN COURS</span>
+          </div>
+
+          <h3>Stagiaire Développeur Full Stack</h3>
+
+          <a
+            href="https://www.linkedin.com/search/results/companies/?keywords=BEN%20JEDDOU%20Technologies"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="exp-co">
+            BEN JEDDOU Technologies ↗
+          </a>
+
+          <p class="exp-sub">ERP Cloud SaaS multi-entreprises</p>
+
+          <ul>
+            <li><span>Conception d’un ERP Cloud SaaS multi-entreprises.</span></li>
+            <li><span>Préparation de l’architecture technique et de la structure du projet.</span></li>
+            <li><span>Conception des modules de gestion et de facturation.</span></li>
+            <li><span>Travail à distance.</span></li>
+          </ul>
+
+          <div class="exp-foot">
+            <span class="chip chip-n">ERP</span>
+            <span class="chip chip-n">SaaS</span>
+            <span class="chip chip-n">Stage à distance</span>
+          </div>
+
+        </article>
 
       </div>
 
@@ -487,94 +511,75 @@
 
   <!-- ================= COMPETENCES ================= -->
 
-  <section id="competences" class="py-14 px-4 bg-gray-900">
+  <section id="competences" class="sec bg-b">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="wrap">
 
-      <div class="text-center mb-8">
-
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Technologies
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          Compétences
-        </h2>
-
+      <div class="head" style="margin-bottom:2rem;">
+        <span class="eyebrow">Technologies</span>
+        <h2 class="h2">Compétences</h2>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
 
-        <a href="https://www.w3schools.com/html/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/html-five.svg" alt="HTML5" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">HTML5</p>
+          <p>HTML5</p>
         </a>
 
-        <a href="https://www.w3schools.com/css/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/css-svgrepo-com.svg" alt="CSS3" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">CSS3</p>
+          <p>CSS3</p>
         </a>
 
-        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/javascript.svg" alt="JavaScript" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">JavaScript</p>
+          <p>JavaScript</p>
         </a>
 
-        <a href="https://react.dev/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/react.svg" alt="React" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">React</p>
+          <p>React</p>
         </a>
 
-        <a href="https://nestjs.com/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://nestjs.com/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/NestJS.svg" alt="NestJS" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">NestJS</p>
+          <p>NestJS</p>
         </a>
 
-        <a href="https://dev.mysql.com/doc/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/mysql-logo.svg" alt="MySQL" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">MySQL</p>
+          <p>MySQL</p>
         </a>
 
-        <a href="https://www.oracle.com/database/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://www.oracle.com/database/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/sql-database-generic.svg" alt="SQL" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">SQL</p>
+          <p>SQL</p>
         </a>
 
-        <a href="https://docs.oracle.com/en/java/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://docs.oracle.com/en/java/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/java.svg" alt="Java" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">Java</p>
+          <p>Java</p>
         </a>
 
-        <a href="https://www.python.org/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/python-svgrepo-com.svg" alt="Python" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">Python</p>
+          <p>Python</p>
         </a>
 
-        <a href="https://en.cppreference.com/w/c" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://en.cppreference.com/w/c" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/c-svgrepo-com.svg" alt="C" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">C</p>
+          <p>C</p>
         </a>
 
-        <a href="https://v2.tailwindcss.com/docs" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://v2.tailwindcss.com/docs" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/tailwind.svg" alt="Tailwind CSS" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">Tailwind</p>
+          <p>Tailwind</p>
         </a>
 
-        <a href="https://github.com/" target="_blank"
-          class="skill-card bg-gray-950 border border-gray-800 rounded-xl p-4 text-center">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="skill-card">
           <img src="icone_image/github.svg" alt="GitHub" class="h-12 mx-auto">
-          <p class="text-sm text-gray-400 mt-2">GitHub</p>
+          <p>GitHub</p>
         </a>
 
       </div>
@@ -583,235 +588,99 @@
 
   </section>
 
-
   <!-- ================= SERVICES ================= -->
 
-  <section id="services" class="py-14 px-4 bg-gray-950">
+  <section id="services" class="sec bg-a">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="wrap">
 
-      <div class="text-center mb-10">
-
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Mes domaines
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          Mes <span class="gradient-text">services</span>
-        </h2>
-
-        <p class="text-gray-500 text-sm md:text-base mt-3 max-w-2xl mx-auto">
+      <div class="head" style="margin-bottom:2.5rem;">
+        <span class="eyebrow">Mes domaines</span>
+        <h2 class="h2">Mes <span class="gradient-text">services</span></h2>
+        <p class="mu text-sm md:text-base mt-3 max-w-2xl mx-auto">
           Je développe des solutions numériques modernes pour le web
           et les applications mobiles.
         </p>
-
       </div>
-
 
       <div class="grid md:grid-cols-3 gap-6">
 
-
         <!-- FRONTEND -->
-
-        <div class="card group bg-gray-900 border border-gray-800 rounded-2xl p-7">
-
-          <div class="w-14 h-14 rounded-2xl bg-cyan-400/10
-                      border border-cyan-400/20
-                      flex items-center justify-center
-                      text-cyan-400 text-2xl
-                      group-hover:bg-cyan-400/20
-                      transition duration-300">
-            🌐
-          </div>
-
-          <p class="text-cyan-400 text-xs font-semibold uppercase tracking-wider mt-6">
-            01 — Frontend
-          </p>
-
-          <h3 class="text-xl font-bold text-white mt-2">
-            Développement Web Frontend
-          </h3>
-
-          <p class="text-gray-400 text-sm leading-relaxed mt-4">
+        <div class="card group p-7">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);">🌐</div>
+          <p class="m text-xs font-semibold uppercase tracking-wider mt-6">01 — Frontend</p>
+          <h3 class="text-xl font-bold t mt-2">Développement Web Frontend</h3>
+          <p class="mu text-sm leading-relaxed mt-4">
             Création d'interfaces web modernes, responsives et faciles
             à utiliser, adaptées aux ordinateurs, tablettes et mobiles.
           </p>
-
           <div class="flex flex-wrap gap-2 mt-5">
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              HTML
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              CSS
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              JavaScript
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              React
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              Tailwind CSS
-            </span>
-
+            <span class="chip chip-n">HTML</span>
+            <span class="chip chip-n">CSS</span>
+            <span class="chip chip-n">JavaScript</span>
+            <span class="chip chip-n">React</span>
+            <span class="chip chip-n">Tailwind CSS</span>
           </div>
-
         </div>
 
-
         <!-- BACKEND -->
-
-        <div class="card group bg-gray-900 border border-gray-800 rounded-2xl p-7">
-
-          <div class="w-14 h-14 rounded-2xl bg-purple-400/10
-                      border border-purple-400/20
-                      flex items-center justify-center
-                      text-purple-400 text-2xl
-                      group-hover:bg-purple-400/20
-                      transition duration-300">
-            ⚙️
-          </div>
-
-          <p class="text-purple-400 text-xs font-semibold uppercase tracking-wider mt-6">
-            02 — Backend
-          </p>
-
-          <h3 class="text-xl font-bold text-white mt-2">
-            Développement Web Backend
-          </h3>
-
-          <p class="text-gray-400 text-sm leading-relaxed mt-4">
+        <div class="card group p-7">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);">⚙️</div>
+          <p class="m text-xs font-semibold uppercase tracking-wider mt-6">02 — Backend</p>
+          <h3 class="text-xl font-bold t mt-2">Développement Web Backend</h3>
+          <p class="mu text-sm leading-relaxed mt-4">
             Développement d'API et de fonctionnalités serveur pour
             gérer les données, les utilisateurs et la logique métier
             d'une application.
           </p>
-
           <div class="flex flex-wrap gap-2 mt-5">
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              Node.js
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              NestJS
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              REST API
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              MySQL
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              TypeORM
-            </span>
-
+            <span class="chip chip-n">Node.js</span>
+            <span class="chip chip-n">NestJS</span>
+            <span class="chip chip-n">REST API</span>
+            <span class="chip chip-n">MySQL</span>
+            <span class="chip chip-n">TypeORM</span>
           </div>
-
         </div>
 
-
         <!-- MOBILE -->
-
-        <div class="card group bg-gray-900 border border-gray-800 rounded-2xl p-7">
-
-          <div class="w-14 h-14 rounded-2xl bg-green-400/10
-                      border border-green-400/20
-                      flex items-center justify-center
-                      text-green-400 text-2xl
-                      group-hover:bg-green-400/20
-                      transition duration-300">
-            📱
-          </div>
-
-          <p class="text-green-400 text-xs font-semibold uppercase tracking-wider mt-6">
-            03 — Mobile
-          </p>
-
-          <h3 class="text-xl font-bold text-white mt-2">
-            Développement Mobile
-          </h3>
-
-          <p class="text-gray-400 text-sm leading-relaxed mt-4">
+        <div class="card group p-7">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);">📱</div>
+          <p class="m text-xs font-semibold uppercase tracking-wider mt-6">03 — Mobile</p>
+          <h3 class="text-xl font-bold t mt-2">Développement Mobile</h3>
+          <p class="mu text-sm leading-relaxed mt-4">
             Développement d'applications mobiles avec React Native
             et Expo, avec des interfaces adaptées aux smartphones.
           </p>
-
           <div class="flex flex-wrap gap-2 mt-5">
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              React Native
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              Expo
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              JavaScript
-            </span>
-
-            <span class="px-3 py-1 rounded-full bg-gray-800 text-gray-400 text-xs">
-              API
-            </span>
-
+            <span class="chip chip-n">React Native</span>
+            <span class="chip chip-n">Expo</span>
+            <span class="chip chip-n">JavaScript</span>
+            <span class="chip chip-n">API</span>
           </div>
-
         </div>
 
       </div>
 
-
       <!-- FULL STACK -->
-
-      <div class="mt-6 bg-gradient-to-r from-gray-900
-                  via-gray-900 to-gray-950
-                  border border-cyan-400/20
-                  rounded-2xl p-6 md:p-8
-                  flex flex-col md:flex-row
-                  items-center justify-between gap-6">
+      <div class="static-card mt-6 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6"
+           style="border-color: rgba(212,119,69,.3); background: var(--petrol);">
 
         <div>
-
           <div class="flex items-center gap-3">
-
-            <div class="w-10 h-10 rounded-xl bg-cyan-400/10
-                        flex items-center justify-center
-                        text-cyan-400">
-              💻
-            </div>
-
-            <h3 class="text-xl font-bold text-white">
-              Développement Full Stack
-            </h3>
-
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.12);">💻</div>
+            <h3 class="text-xl font-bold t">Développement Full Stack</h3>
           </div>
-
-          <p class="text-gray-400 text-sm mt-3 max-w-2xl">
+          <p class="mu text-sm mt-3 max-w-2xl">
             Je peux intervenir sur l'ensemble d'un projet :
             interface utilisateur, backend, API et base de données,
             afin de construire une application web complète.
           </p>
-
         </div>
 
-        <a
-          href="#contact"
-          class="shrink-0 bg-cyan-400 text-gray-950
-                 px-6 py-3 rounded-full
-                 font-bold text-sm
-                 hover:bg-cyan-300
-                 hover:-translate-y-1
-                 transition duration-300">
-          Discuter d'un projet →
-        </a>
+        <a href="#contact" class="btn btn-p shrink-0">Discuter d'un projet →</a>
 
       </div>
 
@@ -819,531 +688,197 @@
 
   </section>
 
-
   <!-- ================= PROJETS ================= -->
 
-  <section id="projets" class="py-14 px-4 bg-gray-950">
+  <section id="projets" class="sec bg-b">
 
     <div class="max-w-7xl mx-auto">
 
-      <div class="text-center mb-10">
-
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Mes réalisations
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
-          Mes <span class="gradient-text">projets</span>
-        </h2>
-
-        <p class="text-gray-500 text-sm mt-2">
-          Projets académiques et personnels
-        </p>
-
+      <div class="head" style="margin-bottom:2.5rem;">
+        <span class="eyebrow">Mes réalisations</span>
+        <h2 class="h2">Mes <span class="gradient-text">projets</span></h2>
+        <p class="mu text-sm mt-2">Projets académiques et personnels</p>
       </div>
-
 
       <!-- ================= PROJETS 2026 ================= -->
 
       <div class="mb-12">
 
-        <div class="flex items-center gap-3 mb-5">
-
-          <span class="w-8 h-0.5 bg-cyan-400"></span>
-
-          <h3 class="text-xl md:text-2xl font-bold text-white">
-            Projets 2026
-          </h3>
-
-          <span class="text-xs text-gray-500">
-            Licence 2 — 2025/2026
-          </span>
-
+        <div class="flex items-center flex-wrap gap-3 mb-5">
+          <span class="w-8 h-0.5" style="background: var(--copper);"></span>
+          <h3 class="text-xl md:text-2xl font-bold t">Projets 2026</h3>
+          <span class="text-xs mu">Licence 2 — 2025/2026</span>
         </div>
 
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
 
           <!-- KAAY NIOU DIANG -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/kaay niou diang.png"
-                alt="Kaay Niou Diang"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-400/15 text-cyan-400 border border-cyan-400/20 text-xs font-semibold">
-                Académique
-              </span>
-
+              <img src="image_projet_et_moi/kaay niou diang.png" alt="Kaay Niou Diang" class="project-img w-full h-44 object-cover">
+              <span class="tag-a">Académique</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Kaay Niou Diang
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                React / NestJS / MySQL
-              </p>
-
-              <div class="flex gap-2">
-
-                <a
-                  href="https://e-learning-xi-blush.vercel.app/"
-                  target="_blank"
-                  class="flex-1 text-center bg-cyan-400 text-gray-950 py-2 rounded-lg text-xs font-bold hover:bg-cyan-300 transition">
-                  Site
-                </a>
-
-                <a
-                  href="https://github.com/koitadimo12-oss/E-learning"
-                  target="_blank"
-                  class="flex-1 text-center border border-gray-700 text-gray-300 py-2 rounded-lg text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-                  Code
-                </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Kaay Niou Diang</h3>
+              <p class="m text-xs mt-1 mb-4">React / NestJS / MySQL</p>
+              <div class="flex gap-2 mt-auto">
+                <a href="https://e-learning-xi-blush.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-p btn-sm flex-1">Site</a>
+                <a href="https://github.com/koitadimo12-oss/E-learning" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
               </div>
-
             </div>
-
           </div>
-
 
           <!-- DIAME DIALLO -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/diame-diallo.png"
-                alt="Site Immobilier Diame Diallo"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-green-400/15 text-green-400 border border-green-400/20 text-xs font-semibold">
-                Personnel
-              </span>
-
+              <img src="image_projet_et_moi/diame-diallo.png" alt="Site Immobilier Diame Diallo" class="project-img w-full h-44 object-cover">
+              <span class="tag-p">Personnel</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Diame Diallo
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                React
-              </p>
-
-              <div class="flex gap-2">
-
-                <a
-                  href="https://diamediallo.vercel.app/"
-                  target="_blank"
-                  class="flex-1 text-center bg-cyan-400 text-gray-950 py-2 rounded-lg text-xs font-bold hover:bg-cyan-300 transition">
-                  Site
-                </a>
-
-                <a
-                  href="https://github.com/koitadimo12-oss/diamediallo"
-                  target="_blank"
-                  class="flex-1 text-center border border-gray-700 text-gray-300 py-2 rounded-lg text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-                  Code
-                </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Diame Diallo</h3>
+              <p class="m text-xs mt-1 mb-4">React</p>
+              <div class="flex gap-2 mt-auto">
+                <a href="https://diamediallo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-p btn-sm flex-1">Site</a>
+                <a href="https://github.com/koitadimo12-oss/diamediallo" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
               </div>
-
             </div>
-
           </div>
-
 
           <!-- GESTION CONTACT -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
-            <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/Gestion-de-contact.png"
-                alt="Application de gestion de contact"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-green-400/15 text-green-400 border border-green-400/20 text-xs font-semibold">
-                Personnel
-              </span>
-
+          <div class="project-card card flex flex-col overflow-hidden">
+            <div class="relative h-44 overflow-hidden flex items-center justify-center p-3" style="background: var(--bg);">
+              <img src="image_projet_et_moi/Gestion-de-contact.png" alt="Application de gestion de contact" class="project-img w-full h-full object-contain rounded-lg" loading="lazy">
+              <span class="tag-p">Personnel</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Gestion de contacts
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                React Native / Expo
-              </p>
-
-              <a
-                href="https://github.com/koitadimo12-oss/React-native-app-gestion-de-contact"
-                target="_blank"
-                class="block text-center border border-gray-700 text-gray-300 py-2 rounded-lg text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-                Voir le code
-              </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Gestion de contacts</h3>
+              <p class="m text-xs mt-1 mb-4">React Native / Expo</p>
+              <div class="grid grid-cols-2 gap-2 mt-auto">
+                <button type="button" id="voirEcransContact" class="btn btn-p btn-sm">Voir les écrans</button>
+                <a href="https://github.com/koitadimo12-oss/React-native-app-gestion-de-contact" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm">Voir le code</a>
+              </div>
             </div>
-
           </div>
 
-
           <!-- PARRAINAGE -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/cour-supreme.png"
-                alt="Parrainage Gestion Candidat"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-400/15 text-cyan-400 border border-cyan-400/20 text-xs font-semibold">
-                Académique
-              </span>
-
+              <img src="image_projet_et_moi/cour-supreme.png" alt="Parrainage Gestion Candidat" class="project-img w-full h-44 object-cover">
+              <span class="tag-a">Académique</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Gestion Candidat
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                JS / PHP / HTML / CSS
-              </p>
-
-              <a
-                href="https://github.com/koitadimo12-oss/parainage-gestion-candidat"
-                target="_blank"
-                class="block text-center border border-gray-700 text-gray-300 py-2 rounded-lg text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-                Voir le code
-              </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Gestion Candidat</h3>
+              <p class="m text-xs mt-1 mb-4">JS / PHP / HTML / CSS</p>
+              <a href="https://github.com/koitadimo12-oss/parainage-gestion-candidat" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm mt-auto">Voir le code</a>
             </div>
-
           </div>
 
         </div>
 
-      </div>
+        <!-- ===== Focus : application mobile de gestion de contacts ===== -->
 
+        
 
       <!-- ================= PROJETS 2024/2025 ================= -->
 
       <div>
 
-        <div class="flex items-center gap-3 mb-5">
-
-          <span class="w-8 h-0.5 bg-purple-500"></span>
-
-          <h3 class="text-xl md:text-2xl font-bold text-white">
-            Projets 2024/2025
-          </h3>
-
-          <span class="text-xs text-gray-500">
-            Licence 1
-          </span>
-
+        <div class="flex items-center flex-wrap gap-3 mb-5">
+          <span class="w-8 h-0.5" style="background: var(--mint);"></span>
+          <h3 class="text-xl md:text-2xl font-bold t">Projets 2024/2025</h3>
+          <span class="text-xs mu">Licence 1</span>
         </div>
 
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
 
           <!-- JEUX WEB -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/js.png"
-                alt="Jeux Web"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-400/15 text-cyan-400 border border-cyan-400/20 text-xs">
-                Académique
-              </span>
-
+              <img src="image_projet_et_moi/js.png" alt="Jeux Web" class="project-img w-full h-44 object-cover">
+              <span class="tag-a">Académique</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Jeux Web
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                HTML / CSS / JS
-              </p>
-
-              <div class="flex gap-2">
-
-                <a
-                  href="projets/mini_jeux_web/index.html"
-                  target="_blank"
-                  class="flex-1 text-center bg-cyan-400 text-gray-950 py-2 rounded-lg text-xs font-bold">
-                  Site
-                </a>
-
-                <a
-                  href="https://github.com/koitadimo12-oss/jeux_web"
-                  target="_blank"
-                  class="flex-1 text-center border border-gray-700 py-2 rounded-lg text-xs">
-                  Code
-                </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Jeux Web</h3>
+              <p class="m text-xs mt-1 mb-4">HTML / CSS / JS</p>
+              <div class="flex gap-2 mt-auto">
+                <a href="projets/mini_jeux_web/index.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
+                <a href="https://github.com/koitadimo12-oss/jeux_web" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
               </div>
-
             </div>
-
           </div>
-
 
           <!-- CALCULATRICE -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/miniCalc.png"
-                alt="Mini Calculatrice"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-green-400/15 text-green-400 border border-green-400/20 text-xs">
-                Personnel
-              </span>
-
+              <img src="image_projet_et_moi/miniCalc.png" alt="Mini Calculatrice" class="project-img w-full h-44 object-cover">
+              <span class="tag-p">Personnel</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Mini Calculatrice
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                HTML / CSS / JS
-              </p>
-
-              <div class="flex gap-2">
-
-                <a
-                  href="projets/calculatrice_simple/index.html"
-                  target="_blank"
-                  class="flex-1 text-center bg-cyan-400 text-gray-950 py-2 rounded-lg text-xs font-bold">
-                  Site
-                </a>
-
-                <a
-                  href="https://github.com/koitadimo12-oss/calculatriceSimple"
-                  target="_blank"
-                  class="flex-1 text-center border border-gray-700 py-2 rounded-lg text-xs">
-                  Code
-                </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Mini Calculatrice</h3>
+              <p class="m text-xs mt-1 mb-4">HTML / CSS / JS</p>
+              <div class="flex gap-2 mt-auto">
+                <a href="projets/calculatrice_simple/index.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
+                <a href="https://github.com/koitadimo12-oss/calculatriceSimple" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
               </div>
-
             </div>
-
           </div>
-
 
           <!-- SITE IMMOBILIER -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/immo.png"
-                alt="Site Immobilier"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-400/15 text-cyan-400 border border-cyan-400/20 text-xs">
-                Académique
-              </span>
-
+              <img src="image_projet_et_moi/immo.png" alt="Site Immobilier" class="project-img w-full h-44 object-cover">
+              <span class="tag-a">Académique</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Site Immobilier
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                HTML / CSS
-              </p>
-
-              <div class="flex gap-2">
-
-                <a
-                  href="projets/luxe house/lux.html"
-                  target="_blank"
-                  class="flex-1 text-center bg-cyan-400 text-gray-950 py-2 rounded-lg text-xs font-bold">
-                  Site
-                </a>
-
-                <a
-                  href="https://github.com/koitadimo12-oss/immo"
-                  target="_blank"
-                  class="flex-1 text-center border border-gray-700 py-2 rounded-lg text-xs">
-                  Code
-                </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Site Immobilier</h3>
+              <p class="m text-xs mt-1 mb-4">HTML / CSS</p>
+              <div class="flex gap-2 mt-auto">
+                <a href="projets/luxe house/lux.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
+                <a href="https://github.com/koitadimo12-oss/immo" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
               </div>
-
             </div>
-
           </div>
-
 
           <!-- LOGIN -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/login.png"
-                alt="Login Page"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-green-400/15 text-green-400 border border-green-400/20 text-xs">
-                Personnel
-              </span>
-
+              <img src="image_projet_et_moi/login.png" alt="Login Page" class="project-img w-full h-44 object-cover">
+              <span class="tag-p">Personnel</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                Login Page
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                HTML / CSS
-              </p>
-
-              <div class="flex gap-2">
-
-                <a
-                  href="projets/login page/index.html"
-                  target="_blank"
-                  class="flex-1 text-center bg-cyan-400 text-gray-950 py-2 rounded-lg text-xs font-bold">
-                  Site
-                </a>
-
-                <a
-                  href="https://github.com/koitadimo12-oss/loginPage"
-                  target="_blank"
-                  class="flex-1 text-center border border-gray-700 py-2 rounded-lg text-xs">
-                  Code
-                </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Login Page</h3>
+              <p class="m text-xs mt-1 mb-4">HTML / CSS</p>
+              <div class="flex gap-2 mt-auto">
+                <a href="projets/login page/index.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
+                <a href="https://github.com/koitadimo12-oss/loginPage" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
               </div>
-
             </div>
-
           </div>
-
 
           <!-- BANK -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/bank.png"
-                alt="Application bancaire Java"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-400/15 text-cyan-400 border border-cyan-400/20 text-xs">
-                Académique
-              </span>
-
+              <img src="image_projet_et_moi/bank.png" alt="Application bancaire Java" class="project-img w-full h-44 object-cover">
+              <span class="tag-a">Académique</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                App Bank
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                Java
-              </p>
-
-              <a
-                href="https://github.com/koitadimo12-oss/javaBank"
-                target="_blank"
-                class="block text-center border border-gray-700 text-gray-300 py-2 rounded-lg text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-                Voir le dépôt
-              </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">App Bank</h3>
+              <p class="m text-xs mt-1 mb-4">Java</p>
+              <a href="https://github.com/koitadimo12-oss/javaBank" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm mt-auto">Voir le dépôt</a>
             </div>
-
           </div>
 
-
           <!-- ELECTION -->
-
-          <div class="project-card card bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
-
+          <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-
-              <img
-                src="image_projet_et_moi/election.png"
-                alt="Application Election"
-                class="project-img w-full h-44 object-cover">
-
-              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-400/15 text-cyan-400 border border-cyan-400/20 text-xs">
-                Académique
-              </span>
-
+              <img src="image_projet_et_moi/election.png" alt="Application Election" class="project-img w-full h-44 object-cover">
+              <span class="tag-a">Académique</span>
             </div>
-
-            <div class="p-5">
-
-              <h3 class="font-bold text-lg text-white">
-                App Election
-              </h3>
-
-              <p class="text-cyan-400 text-xs mt-1 mb-4">
-                C
-              </p>
-
-              <a
-                href="https://github.com/koitadimo12-oss/appElectiom"
-                target="_blank"
-                class="block text-center border border-gray-700 text-gray-300 py-2 rounded-lg text-xs font-semibold hover:border-cyan-400 hover:text-cyan-400 transition">
-                Voir le dépôt
-              </a>
-
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">App Election</h3>
+              <p class="m text-xs mt-1 mb-4">C</p>
+              <a href="https://github.com/koitadimo12-oss/appElectiom" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm mt-auto">Voir le dépôt</a>
             </div>
-
           </div>
 
         </div>
@@ -1354,67 +889,39 @@
 
   </section>
 
-
   <!-- ================= CONTACT ================= -->
 
-  <section id="contact" class="py-14 px-4 bg-gray-900">
+  <section id="contact" class="sec bg-a" style="background: var(--bg2); --card: var(--bg);">
 
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+    <div class="wrap grid md:grid-cols-2 gap-8 items-center">
 
       <div>
-
-        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
-          Contact
-        </span>
-
-        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">
-          Travaillons <span class="gradient-text">ensemble</span>
-        </h2>
-
-        <p class="text-gray-400 leading-relaxed max-w-md">
+        <span class="eyebrow">Contact</span>
+        <h2 class="h2 mb-4">Travaillons <span class="gradient-text">ensemble</span></h2>
+        <p class="leading-relaxed max-w-md">
           Vous avez un projet, une idée ou une opportunité ?
           Je suis disponible pour des collaborations, stages et projets
           dans le domaine du développement informatique.
         </p>
-
       </div>
 
-      <div class="bg-gray-950 border border-gray-800 p-6 rounded-2xl">
+      <div class="static-card p-6">
 
-        <h3 class="text-xl font-bold text-cyan-400 mb-5">
-          Contactez-moi
-        </h3>
+        <h3 class="text-xl font-bold m mb-5">Contactez-moi</h3>
 
         <form id="contactForm" class="space-y-3">
 
-          <input
-            type="text"
-            name="name"
-            placeholder="Nom"
-            required
-            class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 outline-none focus:border-cyan-400 transition">
+          <input type="text" name="name" placeholder="Nom" required class="field">
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 outline-none focus:border-cyan-400 transition">
+          <input type="email" name="email" placeholder="Email" required class="field">
 
-          <textarea
-            name="message"
-            rows="4"
-            placeholder="Votre message"
-            required
-            class="w-full bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 outline-none focus:border-cyan-400 transition"></textarea>
+          <textarea name="message" rows="4" placeholder="Votre message" required class="field"></textarea>
 
-          <button
-            type="submit"
-            class="w-full bg-cyan-400 text-gray-950 font-bold py-3 rounded-lg hover:bg-cyan-300 transition">
+          <button type="submit" class="btn btn-p w-full" style="border-radius:.6rem;">
             Envoyer le message
           </button>
 
-          <p id="successMessage" class="hidden text-green-400 text-center text-sm">
+          <p id="successMessage" class="hidden m text-center text-sm">
             Merci, votre message a été envoyé !
           </p>
 
@@ -1426,141 +933,55 @@
 
   </section>
 
-
   <!-- ================= FOOTER ================= -->
 
-  <footer class="relative bg-gray-900 border-t border-gray-800 py-10 px-4 overflow-hidden">
+  <footer class="relative border-t py-10 px-4 overflow-hidden" style="background: var(--bg); border-color: var(--line);">
 
-    <div class="absolute top-0 left-1/2 -translate-x-1/2
-                w-40 h-px bg-cyan-400
-                shadow-[0_0_20px_#22d3ee]">
-    </div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px" style="background: var(--copper);"></div>
 
     <div class="max-w-6xl mx-auto text-center">
 
-      <h3 class="text-xl md:text-2xl font-bold text-white">
-        Abdou <span class="text-cyan-400">Wahab Koita</span>
+      <h3 class="text-xl md:text-2xl font-bold t">
+        Abdou <span class="m">Wahab Koita</span>
       </h3>
 
-      <p class="text-gray-400 text-sm mt-2">
-        Développeur Full Stack Junior
-      </p>
+      <p class="mu text-sm mt-2">Développeur Full Stack Junior</p>
 
       <!-- ================= RÉSEAUX ================= -->
 
-      <div class="flex justify-center items-center gap-6 mt-7">
+      <div class="flex justify-center items-center gap-4 mt-7">
 
-        <!-- LinkedIn -->
-
-        <a
-          href="https://www.linkedin.com/in/abdou-wahab-koita-64b1943aa/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          class="group transition duration-300 hover:-translate-y-1"
-        >
-          <img
-            src="icone_image/linkedin.svg"
-            alt="LinkedIn"
-            class="w-7 h-7 object-contain
-                   opacity-70
-                   group-hover:opacity-100
-                   group-hover:scale-110
-                   transition duration-300
-                   drop-shadow-[0_0_0px_#22d3ee]
-                   group-hover:drop-shadow-[0_0_8px_#22d3ee]"
-          >
+        <a href="https://www.linkedin.com/in/abdou-wahab-koita-64b1943aa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="soc">
+          <img src="icone_image/linkedin.svg" alt="LinkedIn" class="w-7 h-7 object-contain">
         </a>
 
-        <!-- WhatsApp -->
-
-        <a
-          href="https://wa.me/221775264107"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp"
-          class="group transition duration-300 hover:-translate-y-1"
-        >
-          <img
-            src="icone_image/whatsapp.svg"
-            alt="WhatsApp"
-            class="w-7 h-7 object-contain
-                   opacity-70
-                   group-hover:opacity-100
-                   group-hover:scale-110
-                   transition duration-300
-                   drop-shadow-[0_0_0px_#22d3ee]
-                   group-hover:drop-shadow-[0_0_8px_#22d3ee]"
-          >
+        <a href="https://wa.me/221775264107" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="soc">
+          <img src="icone_image/whatsapp.svg" alt="WhatsApp" class="w-7 h-7 object-contain">
         </a>
 
-        <!-- Instagram -->
-
-        <a
-          href="https://www.instagram.com/dimokoita12/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          class="group transition duration-300 hover:-translate-y-1"
-        >
-          <img
-            src="icone_image/instagram.svg"
-            alt="Instagram"
-            class="w-7 h-7 object-contain
-                   opacity-70
-                   group-hover:opacity-100
-                   group-hover:scale-110
-                   transition duration-300
-                   drop-shadow-[0_0_0px_#22d3ee]
-                   group-hover:drop-shadow-[0_0_8px_#22d3ee]"
-          >
+        <a href="https://www.instagram.com/dimokoita12/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="soc">
+          <img src="icone_image/instagram.svg" alt="Instagram" class="w-7 h-7 object-contain">
         </a>
 
-        <!-- Snapchat -->
-
-        <a
-          href="https://www.snapchat.com/add/dimokoita23"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Snapchat"
-          class="group transition duration-300 hover:-translate-y-1"
-        >
-          <img
-            src="icone_image/snapchat-color.svg"
-            alt="Snapchat"
-            class="w-7 h-7 object-contain
-                   opacity-70
-                   group-hover:opacity-100
-                   group-hover:scale-110
-                   transition duration-300
-                   drop-shadow-[0_0_0px_#22d3ee]
-                   group-hover:drop-shadow-[0_0_8px_#22d3ee]"
-          >
+        <a href="https://www.snapchat.com/add/dimokoita23" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" class="soc">
+          <img src="icone_image/snapchat-color.svg" alt="Snapchat" class="w-7 h-7 object-contain">
         </a>
 
       </div>
-
 
       <!-- Séparation -->
 
       <div class="flex items-center justify-center gap-3 mt-8">
-
-        <div class="h-px w-16 bg-gray-800"></div>
-
-        <div class="w-1.5 h-1.5 rounded-full bg-cyan-400
-                    shadow-[0_0_8px_#22d3ee]">
-        </div>
-
-        <div class="h-px w-16 bg-gray-800"></div>
-
+        <div class="h-px w-16" style="background: var(--line);"></div>
+        <div class="w-1.5 h-1.5 rounded-full" style="background: var(--mint);"></div>
+        <div class="h-px w-16" style="background: var(--line);"></div>
       </div>
-
 
       <!-- Copyright -->
 
-      <p class="text-xs text-gray-500 mt-6">
+      <p class="text-xs mu mt-6">
         © 2026 Abdou Wahab Koita
-        <span class="text-gray-700 mx-1">•</span>
+        <span class="mx-1" style="opacity:.5;">•</span>
         Tous droits réservés.
       </p>
 
@@ -1568,6 +989,55 @@
 
   </footer>
 
+
+
+  <!-- Visionneuse des six écrans de l'application -->
+  <div id="visionneuseEcrans" class="hidden fixed inset-0 z-[100] p-4 sm:p-6 flex-col items-center justify-center" style="background: rgba(6,31,32,.96);" role="dialog" aria-modal="true" aria-labelledby="titreVisionneuse">
+    <div class="w-full max-w-6xl flex items-center justify-between gap-4 mb-4">
+      <h2 id="titreVisionneuse" class="text-lg sm:text-xl font-bold t">Gestion de contacts — les 6 écrans</h2>
+      <button type="button" id="retourEcransContact" class="btn btn-p btn-sm shrink-0" aria-label="Fermer l’image et retourner aux projets">← Retour aux projets</button>
+    </div>
+    <div class="w-full max-w-6xl min-h-0 flex-1 flex items-center justify-center overflow-auto rounded-xl p-2" style="background: var(--bg2); border: 1px solid var(--line);">
+      <img src="image_projet_et_moi/les-6ecrans.jpg" alt="Aperçu des six écrans de l’application de gestion de contacts" class="block max-w-full max-h-full object-contain" style="max-height: calc(100vh - 125px);">
+    </div>
+    <p class="mt-3 text-center text-sm mu">Cliquez sur « Retour aux projets » ou appuyez sur Échap pour revenir au portfolio.</p>
+  </div>
+
+
+  <script>
+    (function () {
+      const openButtons = document.querySelectorAll("#voirEcransContact, [data-ouvrir-ecrans]");
+      const viewer = document.getElementById("visionneuseEcrans");
+      const closeButton = document.getElementById("retourEcransContact");
+      let lastOpener = null;
+
+      if (!openButtons.length || !viewer || !closeButton) return;
+
+      function openViewer(event) {
+        lastOpener = event.currentTarget;
+        viewer.classList.remove("hidden");
+        viewer.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        closeButton.focus();
+      }
+
+      function closeViewer() {
+        viewer.classList.add("hidden");
+        viewer.classList.remove("flex");
+        document.body.style.overflow = "";
+        if (lastOpener) lastOpener.focus();
+      }
+
+      openButtons.forEach(function (btn) { btn.addEventListener("click", openViewer); });
+      closeButton.addEventListener("click", closeViewer);
+      viewer.addEventListener("click", function (event) {
+        if (event.target === viewer) closeViewer();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !viewer.classList.contains("hidden")) closeViewer();
+      });
+    })();
+  </script>
 
   <!-- ================= SCRIPTS ================= -->
 
@@ -1583,4 +1053,3 @@
 
 </body>
 </html>
-

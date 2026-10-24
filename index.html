@@ -139,11 +139,84 @@
     .field::placeholder { color: #7F9A93; }
     .field:focus { border-color: var(--mint); box-shadow: 0 0 0 3px rgba(142, 214, 197, .18); }
 
+
+    /* Navbar flottante, aérée et responsive */
+    body { padding-top: 1rem; }
+    .site-header { pointer-events: none; }
+    .site-header nav { pointer-events: auto; }
+    .nav-shell {
+      position: relative;
+      border: 1px solid rgba(142,214,197,.22);
+      border-radius: 1.1rem;
+      background: rgba(6,31,32,.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 12px 35px rgba(0,0,0,.18);
+    }
+    .brand { letter-spacing: -.035em; }
+    .brand-dot { color: var(--copper); }
+    .nav-panel { min-width: 0; }
+    .nav-list {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: clamp(.45rem, 1.15vw, 1.15rem); font-size: .8rem;
+      overflow: visible;
+    }
+    .nav-link {
+      display: inline-flex; align-items: center; gap: .35rem;
+      color: var(--muted); padding: .55rem .25rem; white-space: nowrap;
+      border-radius: .5rem; transition: color .2s ease, background .2s ease;
+    }
+    .nav-link:hover, .nav-link:focus-visible {
+      color: var(--mint); background: rgba(142,214,197,.07);
+    }
+    .nav-icon { width: .9rem; height: .9rem; flex: none; }
+    .nav-contact {
+      padding: .6rem .85rem; color: var(--bg); background: var(--copper);
+      border-radius: .7rem; font-weight: 700;
+    }
+    .nav-contact:hover { color: var(--bg); background: var(--copper-h); }
+    .menu-toggle {
+      width: 2.65rem; height: 2.65rem; flex: none;
+      align-items: center; justify-content: center;
+      color: var(--cream); border: 1px solid var(--line);
+      border-radius: .75rem; background: rgba(142,214,197,.07);
+    }
+    .menu-toggle:hover { color: var(--mint); border-color: var(--mint); }
+
+    @media (max-width: 767px) {
+      .nav-shell { flex-wrap: wrap; padding: .7rem .85rem; }
+      .menu-toggle { display: inline-flex; }
+      .nav-panel {
+        display: none; flex-basis: 100%; width: 100%;
+        padding-top: .65rem; margin-top: .35rem;
+        border-top: 1px solid var(--line);
+      }
+      .nav-panel.is-open { display: block; }
+      .nav-list {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .3rem; overflow: visible; font-size: .88rem;
+      }
+      .nav-list li { min-width: 0; }
+      .nav-link {
+        width: 100%; white-space: normal; min-height: 2.65rem;
+        padding: .6rem .55rem; gap: .5rem;
+      }
+      .nav-icon { width: 1rem; height: 1rem; }
+      .nav-contact { justify-content: flex-start; }
+      #acceuil { padding-top: 9rem !important; }
+      .sec { padding: 3rem 1rem; }
+      .btn { max-width: 100%; }
+      .exp, .card, .static-card { min-width: 0; }
+      #visionneuseEcrans { padding: .75rem; }
+      #visionneuseEcrans > div:first-child { align-items: flex-start; }
+      #titreVisionneuse { font-size: 1rem; }
+    }
+    @media (min-width: 768px) {
+      #acceuil { padding-top: 9rem !important; }
+    }
+
     /* Navigation */
-    .nav-link { color: var(--muted); padding: .5rem .25rem; white-space: nowrap; transition: color .2s ease; }
-    .nav-link:hover { color: var(--mint); }
-    .nav-list { display: flex; align-items: center; gap: 1.25rem; font-size: .875rem; overflow-x: auto; scrollbar-width: none; }
-    .nav-list::-webkit-scrollbar { display: none; }
+    /* Les styles responsives de la navbar sont définis plus haut. */
 
     /* Réseaux */
     .soc img { opacity: .75; transition: opacity .3s ease, transform .3s ease, filter .3s ease; }
@@ -164,34 +237,39 @@
       * { transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
 <body>
 
   <!-- ================= NAVBAR ================= -->
-
-  <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b" style="background: rgba(6,31,32,.94); border-color: var(--line);">
-
-    <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row md:justify-between md:items-center gap-1 md:gap-6">
-
-      <a href="#acceuil" class="text-xl font-bold t">
-        Abdou <span class="m">Wahab</span>
+  <header class="site-header fixed top-4 left-0 w-full z-50 px-3 sm:px-5">
+    <nav class="nav-shell max-w-7xl mx-auto px-4 sm:px-5 py-3 flex items-center justify-between gap-4"
+         aria-label="Navigation principale">
+      <a href="#acceuil" class="brand text-lg sm:text-xl font-bold t shrink-0" aria-label="Accueil - Abdou Wahab Koita">
+        Abdou <span class="m">Wahab</span><span class="brand-dot">.</span>
       </a>
 
-      <ul class="nav-list">
-        <li><a href="#acceuil" class="nav-link">Accueil</a></li>
-        <li><a href="#apropos" class="nav-link">À propos</a></li>
-        <li><a href="#formation" class="nav-link">Formation</a></li>
-        <li><a href="#experience" class="nav-link">Expérience</a></li>
-        <li><a href="#competences" class="nav-link">Compétences</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#projets" class="nav-link">Projets</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
+      <button id="menuToggle" type="button" class="menu-toggle md:hidden"
+              aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav">
+        <i data-lucide="menu" class="menu-open-icon w-5 h-5" aria-hidden="true"></i>
+        <i data-lucide="x" class="menu-close-icon w-5 h-5 hidden" aria-hidden="true"></i>
+      </button>
 
+      <div id="mainNav" class="nav-panel">
+        <ul class="nav-list">
+          <li><a href="#acceuil" class="nav-link"><i data-lucide="house" class="nav-icon" aria-hidden="true"></i>Accueil</a></li>
+          <li><a href="#apropos" class="nav-link"><i data-lucide="user-round" class="nav-icon" aria-hidden="true"></i>À propos</a></li>
+          <li><a href="#formation" class="nav-link"><i data-lucide="graduation-cap" class="nav-icon" aria-hidden="true"></i>Formation</a></li>
+          <li><a href="#experience" class="nav-link"><i data-lucide="briefcase-business" class="nav-icon" aria-hidden="true"></i>Expérience</a></li>
+          <li><a href="#competences" class="nav-link"><i data-lucide="code-2" class="nav-icon" aria-hidden="true"></i>Compétences</a></li>
+          <li><a href="#services" class="nav-link"><i data-lucide="layers-3" class="nav-icon" aria-hidden="true"></i>Services</a></li>
+          <li><a href="#projets" class="nav-link"><i data-lucide="folder-git-2" class="nav-icon" aria-hidden="true"></i>Projets</a></li>
+          <li><a href="#contact" class="nav-link nav-contact"><i data-lucide="mail" class="nav-icon" aria-hidden="true"></i>Contact</a></li>
+        </ul>
+      </div>
     </nav>
-
   </header>
 
   <!-- ================= ACCUEIL ================= -->
@@ -210,14 +288,14 @@
       </h1>
 
       <p class="max-w-2xl mx-auto mu text-base md:text-lg mb-8">
-        Je conçois des applications web modernes et je développe
+        Je conçois des applications web et Mobile modernes et je développe
         progressivement mes compétences à travers des projets académiques
         et personnels.
       </p>
 
       <div class="flex flex-wrap justify-center gap-3">
-        <a href="#projets" class="btn btn-p">Voir mes projets</a>
-        <a href="#contact" class="btn btn-g">Me contacter</a>
+        <a href="#projets" class="btn btn-p"><i data-lucide="folder-code" class="w-4 h-4 mr-2" aria-hidden="true"></i>Voir mes projets</a>
+        <a href="#contact" class="btn btn-g"><i data-lucide="mail" class="w-4 h-4 mr-2" aria-hidden="true"></i>Me contacter</a>
       </div>
 
     </div>
@@ -263,7 +341,7 @@
           <div class="flex items-center gap-3 mb-5">
 
             <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.1);">
-              💻
+              <i data-lucide="laptop" class="w-5 h-5" aria-hidden="true"></i>
             </div>
 
             <div>
@@ -320,14 +398,14 @@
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-g">
-              🎓 UNIPRO
+              <i data-lucide="graduation-cap" class="w-4 h-4 mr-2" aria-hidden="true"></i> UNIPRO
             </a>
 
             <a
               href="mon_cv/CV Abdou.W.K.DEV.pdf"
               download
               class="btn btn-p">
-              📄 Télécharger mon CV
+              <i data-lucide="file-down" class="w-4 h-4 mr-2" aria-hidden="true"></i> Télécharger mon CV
             </a>
 
           </div>
@@ -489,15 +567,20 @@
           <p class="exp-sub">ERP Cloud SaaS multi-entreprises</p>
 
           <ul>
-            <li><span>Conception d’un ERP Cloud SaaS multi-entreprises.</span></li>
+            <li><span>Conception  ERP Cloud SaaS multi-entreprises.</span></li>
             <li><span>Préparation de l’architecture technique et de la structure du projet.</span></li>
             <li><span>Conception des modules de gestion et de facturation.</span></li>
             <li><span>Travail à distance.</span></li>
           </ul>
 
           <div class="exp-foot">
+
             <span class="chip chip-n">ERP</span>
             <span class="chip chip-n">SaaS</span>
+            <span class="chip">React.js</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">NestJS</span>
+            <span class="chip">Node.js</span>
             <span class="chip chip-n">Stage à distance</span>
           </div>
 
@@ -608,7 +691,7 @@
         <!-- FRONTEND -->
         <div class="card group p-7">
           <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
-               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);">🌐</div>
+               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);"><i data-lucide="panels-top-left" class="w-7 h-7 m" aria-hidden="true"></i></div>
           <p class="m text-xs font-semibold uppercase tracking-wider mt-6">01 — Frontend</p>
           <h3 class="text-xl font-bold t mt-2">Développement Web Frontend</h3>
           <p class="mu text-sm leading-relaxed mt-4">
@@ -627,7 +710,7 @@
         <!-- BACKEND -->
         <div class="card group p-7">
           <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
-               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);">⚙️</div>
+               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);"><i data-lucide="server-cog" class="w-7 h-7 m" aria-hidden="true"></i></div>
           <p class="m text-xs font-semibold uppercase tracking-wider mt-6">02 — Backend</p>
           <h3 class="text-xl font-bold t mt-2">Développement Web Backend</h3>
           <p class="mu text-sm leading-relaxed mt-4">
@@ -647,7 +730,7 @@
         <!-- MOBILE -->
         <div class="card group p-7">
           <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
-               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);">📱</div>
+               style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);"><i data-lucide="smartphone" class="w-7 h-7 m" aria-hidden="true"></i></div>
           <p class="m text-xs font-semibold uppercase tracking-wider mt-6">03 — Mobile</p>
           <h3 class="text-xl font-bold t mt-2">Développement Mobile</h3>
           <p class="mu text-sm leading-relaxed mt-4">
@@ -670,7 +753,7 @@
 
         <div>
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.12);">💻</div>
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.12);"><i data-lucide="laptop" class="w-5 h-5" aria-hidden="true"></i></div>
             <h3 class="text-xl font-bold t">Développement Full Stack</h3>
           </div>
           <p class="mu text-sm mt-3 max-w-2xl">
@@ -680,7 +763,7 @@
           </p>
         </div>
 
-        <a href="#contact" class="btn btn-p shrink-0">Discuter d'un projet →</a>
+        <a href="#contact" class="btn btn-p shrink-0"><i data-lucide="message-circle" class="w-4 h-4 mr-2" aria-hidden="true"></i>Discuter d'un projet</a>
 
       </div>
 
@@ -754,8 +837,8 @@
               <h3 class="font-bold text-lg t">Gestion de contacts</h3>
               <p class="m text-xs mt-1 mb-4">React Native / Expo</p>
               <div class="grid grid-cols-2 gap-2 mt-auto">
-                <button type="button" id="voirEcransContact" class="btn btn-p btn-sm">Voir les écrans</button>
-                <a href="https://github.com/koitadimo12-oss/React-native-app-gestion-de-contact" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm">Voir le code</a>
+                <button type="button" id="voirEcransContact" class="btn btn-p btn-sm"><i data-lucide="images" class="w-4 h-4 mr-1" aria-hidden="true"></i>Voir les écrans</button>
+                <a href="https://github.com/koitadimo12-oss/React-native-app-gestion-de-contact" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm"><i data-lucide="github" class="w-4 h-4 mr-1" aria-hidden="true"></i>Voir le code</a>
               </div>
             </div>
           </div>
@@ -1037,6 +1120,40 @@
         if (event.key === "Escape" && !viewer.classList.contains("hidden")) closeViewer();
       });
     })();
+  </script>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById("menuToggle");
+      const panel = document.getElementById("mainNav");
+      if (!toggle || !panel) return;
+
+      function setMenu(open) {
+        panel.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+        toggle.querySelector(".menu-open-icon")?.classList.toggle("hidden", open);
+        toggle.querySelector(".menu-close-icon")?.classList.toggle("hidden", !open);
+      }
+
+      toggle.addEventListener("click", function () {
+        setMenu(toggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      panel.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () { setMenu(false); });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") setMenu(false);
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth >= 768) setMenu(false);
+      });
+    })();
+
+    if (window.lucide) lucide.createIcons();
   </script>
 
   <!-- ================= SCRIPTS ================= -->

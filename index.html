@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Abdou Wahab Koita, développeur Full Stack junior">
+  <meta name="description" content="Portfolio de Abdou Wahab Koita, développeur Full Stack junior : projets web et mobile, expériences et compétences.">
+  <meta name="author" content="Abdou Wahab Koita">
   <meta name="theme-color" content="#061F20">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfolio – Abdou Wahab Koita">
+  <meta property="og:description" content="Développeur Full Stack junior : projets web et mobile, expériences et compétences.">
+  <meta property="og:locale" content="fr_FR">
   <link rel="manifest" href="manifest.json">
 
   <title>Portfolio – Abdou Wahab Koita</title>
@@ -27,7 +31,7 @@
     }
 
     html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
-    body { background: var(--bg); color: var(--muted); overflow-x: hidden; }
+    body { background: var(--bg); color: var(--muted); overflow-x: hidden; padding-top: 1rem; }
     img { max-width: 100%; }
     :focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
 
@@ -42,7 +46,6 @@
     .t { color: var(--cream); }
     .m { color: var(--mint); }
     .mu { color: var(--muted); }
-    .cu { color: var(--copper); }
 
     .gradient-text {
       background: linear-gradient(90deg, var(--mint), var(--cream));
@@ -68,16 +71,24 @@
     .project-img { transition: transform .5s ease; }
     .project-card:hover .project-img { transform: scale(1.05); }
 
-    .skill-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: .9rem;
-      padding: 1rem;
-      text-align: center;
+    .lvl-row {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--line); border-radius: .9rem; padding: .85rem 1rem;
       transition: transform .25s ease, border-color .25s ease;
     }
-    .skill-card:hover { transform: translateY(-4px); border-color: var(--mint); }
-    .skill-card p { color: var(--muted); font-size: .875rem; margin-top: .5rem; }
+    .lvl-row:hover, .lvl-row:focus-visible { transform: translateY(-3px); border-color: var(--mint); }
+    .lvl-icon { width: 2.25rem; height: 2.25rem; flex: none; object-fit: contain; }
+    .lvl-body { flex: 1; min-width: 0; }
+    .lvl-top { display: flex; justify-content: space-between; gap: .5rem; font-size: .875rem; margin-bottom: .4rem; }
+    .lvl-name { color: var(--cream); font-weight: 600; }
+    .lvl-pct { color: var(--mint); font-weight: 700; }
+    .lvl-track { height: .5rem; border-radius: 999px; background: rgba(142, 214, 197, .12); overflow: hidden; }
+    .lvl-fill {
+      height: 100%; width: 0; border-radius: inherit;
+      background: linear-gradient(90deg, var(--copper), var(--mint));
+      transition: width 1s ease;
+    }
+    .lvl-on .lvl-fill { width: var(--lvl); }
 
     /* Boutons */
     .btn {
@@ -86,8 +97,9 @@
       border-radius: 999px; font-weight: 700; font-size: .875rem; text-align: center;
       cursor: pointer; transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
     }
+    .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
     .btn-p { background: var(--copper); color: var(--bg); border: 1px solid var(--copper); }
-    .btn-p:hover { background: var(--copper-h); border-color: var(--copper-h); transform: translateY(-2px); }
+    .btn-p:hover:not(:disabled) { background: var(--copper-h); border-color: var(--copper-h); transform: translateY(-2px); }
     .btn-g { border: 1px solid rgba(142, 214, 197, .35); color: var(--cream); background: transparent; }
     .btn-g:hover { border-color: var(--mint); color: var(--mint); background: rgba(142, 214, 197, .08); }
     .btn-sm { border-radius: .6rem; min-height: 42px; padding: .5rem .75rem; font-size: .8rem; }
@@ -138,20 +150,20 @@
     }
     .field::placeholder { color: #7F9A93; }
     .field:focus { border-color: var(--mint); box-shadow: 0 0 0 3px rgba(142, 214, 197, .18); }
+    .field[aria-invalid="true"] { border-color: var(--copper); }
+    .form-error { color: var(--copper-h); }
 
-
-    /* Navbar flottante, aérée et responsive */
-    body { padding-top: 1rem; }
+    /* Navbar flottante */
     .site-header { pointer-events: none; }
     .site-header nav { pointer-events: auto; }
     .nav-shell {
       position: relative;
-      border: 1px solid rgba(142,214,197,.22);
+      border: 1px solid rgba(142, 214, 197, .22);
       border-radius: 1.1rem;
-      background: rgba(6,31,32,.88);
+      background: rgba(6, 31, 32, .88);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 12px 35px rgba(0,0,0,.18);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .18);
     }
     .brand { letter-spacing: -.035em; }
     .brand-dot { color: var(--copper); }
@@ -159,27 +171,21 @@
     .nav-list {
       display: flex; align-items: center; justify-content: flex-end;
       gap: clamp(.45rem, 1.15vw, 1.15rem); font-size: .8rem;
-      overflow: visible;
     }
     .nav-link {
       display: inline-flex; align-items: center; gap: .35rem;
       color: var(--muted); padding: .55rem .25rem; white-space: nowrap;
       border-radius: .5rem; transition: color .2s ease, background .2s ease;
     }
-    .nav-link:hover, .nav-link:focus-visible {
-      color: var(--mint); background: rgba(142,214,197,.07);
-    }
+    .nav-link:hover, .nav-link:focus-visible { color: var(--mint); background: rgba(142, 214, 197, .07); }
     .nav-icon { width: .9rem; height: .9rem; flex: none; }
-    .nav-contact {
-      padding: .6rem .85rem; color: var(--bg); background: var(--copper);
-      border-radius: .7rem; font-weight: 700;
-    }
-    .nav-contact:hover { color: var(--bg); background: var(--copper-h); }
+    .nav-contact { padding: .6rem .85rem; color: var(--bg); background: var(--copper); border-radius: .7rem; font-weight: 700; }
+    .nav-contact:hover, .nav-contact:focus-visible { color: var(--bg); background: var(--copper-h); }
     .menu-toggle {
       width: 2.65rem; height: 2.65rem; flex: none;
       align-items: center; justify-content: center;
       color: var(--cream); border: 1px solid var(--line);
-      border-radius: .75rem; background: rgba(142,214,197,.07);
+      border-radius: .75rem; background: rgba(142, 214, 197, .07);
     }
     .menu-toggle:hover { color: var(--mint); border-color: var(--mint); }
 
@@ -192,62 +198,43 @@
         border-top: 1px solid var(--line);
       }
       .nav-panel.is-open { display: block; }
-      .nav-list {
-        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: .3rem; overflow: visible; font-size: .88rem;
-      }
+      .nav-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem; font-size: .88rem; }
       .nav-list li { min-width: 0; }
-      .nav-link {
-        width: 100%; white-space: normal; min-height: 2.65rem;
-        padding: .6rem .55rem; gap: .5rem;
-      }
+      .nav-link { width: 100%; white-space: normal; min-height: 2.65rem; padding: .6rem .55rem; gap: .5rem; }
       .nav-icon { width: 1rem; height: 1rem; }
       .nav-contact { justify-content: flex-start; }
-      #acceuil { padding-top: 9rem !important; }
+      #accueil { padding-top: 9rem !important; }
       .sec { padding: 3rem 1rem; }
       .btn { max-width: 100%; }
-      .exp, .card, .static-card { min-width: 0; }
       #visionneuseEcrans { padding: .75rem; }
-      #visionneuseEcrans > div:first-child { align-items: flex-start; }
       #titreVisionneuse { font-size: 1rem; }
     }
     @media (min-width: 768px) {
-      #acceuil { padding-top: 9rem !important; }
+      #accueil { padding-top: 9rem !important; }
     }
-
-    /* Navigation */
-    /* Les styles responsives de la navbar sont définis plus haut. */
 
     /* Réseaux */
-    .soc img { opacity: .75; transition: opacity .3s ease, transform .3s ease, filter .3s ease; }
-    .soc:hover img { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(142, 214, 197, .5)); }
     .soc { transition: transform .3s ease; display: inline-flex; padding: .35rem; }
-    .soc:hover { transform: translateY(-3px); }
-
-    /* Application mobile */
-    .feat { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
-    .feat li { display: flex; gap: .7rem; align-items: flex-start; }
-    .feat li::before { content: "✓"; flex: none; color: var(--mint); font-weight: 700; }
-    .phone-frame {
-      background: var(--petrol); border: 1px solid rgba(142, 214, 197, .3);
-      border-radius: 1.5rem; padding: .75rem; box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
-    }
+    .soc img { opacity: .75; transition: opacity .3s ease, transform .3s ease, filter .3s ease; }
+    .soc:hover, .soc:focus-visible { transform: translateY(-3px); }
+    .soc:hover img, .soc:focus-visible img { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(142, 214, 197, .5)); }
 
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
 </head>
 
 <body>
+
+  <a href="#main" class="sr-only focus:not-sr-only fixed top-2 left-2 z-[110] btn btn-p">Aller au contenu</a>
 
   <!-- ================= NAVBAR ================= -->
   <header class="site-header fixed top-4 left-0 w-full z-50 px-3 sm:px-5">
     <nav class="nav-shell max-w-7xl mx-auto px-4 sm:px-5 py-3 flex items-center justify-between gap-4"
          aria-label="Navigation principale">
-      <a href="#acceuil" class="brand text-lg sm:text-xl font-bold t shrink-0" aria-label="Accueil - Abdou Wahab Koita">
+      <a href="#accueil" class="brand text-lg sm:text-xl font-bold t shrink-0" aria-label="Accueil - Abdou Wahab Koita">
         Abdou <span class="m">Wahab</span><span class="brand-dot">.</span>
       </a>
 
@@ -259,7 +246,7 @@
 
       <div id="mainNav" class="nav-panel">
         <ul class="nav-list">
-          <li><a href="#acceuil" class="nav-link"><i data-lucide="house" class="nav-icon" aria-hidden="true"></i>Accueil</a></li>
+          <li><a href="#accueil" class="nav-link"><i data-lucide="house" class="nav-icon" aria-hidden="true"></i>Accueil</a></li>
           <li><a href="#apropos" class="nav-link"><i data-lucide="user-round" class="nav-icon" aria-hidden="true"></i>À propos</a></li>
           <li><a href="#formation" class="nav-link"><i data-lucide="graduation-cap" class="nav-icon" aria-hidden="true"></i>Formation</a></li>
           <li><a href="#experience" class="nav-link"><i data-lucide="briefcase-business" class="nav-icon" aria-hidden="true"></i>Expérience</a></li>
@@ -272,10 +259,10 @@
     </nav>
   </header>
 
+  <main id="main">
+
   <!-- ================= ACCUEIL ================= -->
-
-  <section id="acceuil" class="min-h-[80vh] pt-36 md:pt-32 pb-16 px-4 flex items-center justify-center bg-b">
-
+  <section id="accueil" class="min-h-[80vh] pt-36 md:pt-32 pb-16 px-4 flex items-center justify-center bg-b">
     <div class="max-w-4xl mx-auto text-center">
 
       <span class="chip mb-4" style="padding:.4rem 1rem; font-size:.85rem;">
@@ -284,11 +271,11 @@
 
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold t leading-tight mb-5">
         Développeur
-        <span class="gradient-text"> Full Stack Junior</span>
+        <span class="gradient-text">Full Stack Junior</span>
       </h1>
 
       <p class="max-w-2xl mx-auto mu text-base md:text-lg mb-8">
-        Je conçois des applications web et Mobile modernes et je développe
+        Je conçois des applications web et mobiles modernes et je développe
         progressivement mes compétences à travers des projets académiques
         et personnels.
       </p>
@@ -299,13 +286,10 @@
       </div>
 
     </div>
-
   </section>
 
   <!-- ================= À PROPOS ================= -->
-
   <section id="apropos" class="sec bg-a">
-
     <div class="wrap">
 
       <div class="head">
@@ -315,14 +299,15 @@
 
       <div class="grid md:grid-cols-[280px_1fr] gap-8 items-center">
 
-        <!-- PROFIL -->
+        <!-- Profil -->
         <div class="flex flex-col items-center">
-
           <div class="relative">
             <div class="absolute -inset-2 rounded-full opacity-20 blur-lg" style="background: var(--mint);"></div>
             <img
               src="image_projet_et_moi/logo4.jpeg"
-              alt="Abdou Wahab Koita"
+              alt="Portrait de Abdou Wahab Koita"
+              width="240" height="240"
+              decoding="async"
               class="relative w-52 h-52 md:w-60 md:h-60 object-cover rounded-full shadow-2xl"
               style="border: 4px solid rgba(142,214,197,.6);">
           </div>
@@ -332,27 +317,22 @@
             <p class="m text-sm mt-1">Développeur Full Stack Junior</p>
             <p class="mu text-sm mt-1">Étudiant en Licence 3</p>
           </div>
-
         </div>
 
-        <!-- TEXTE -->
+        <!-- Texte -->
         <div class="static-card p-6 md:p-8">
 
           <div class="flex items-center gap-3 mb-5">
-
             <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.1);">
               <i data-lucide="laptop" class="w-5 h-5" aria-hidden="true"></i>
             </div>
-
             <div>
               <h3 class="text-xl font-bold t">Développeur Full Stack junior</h3>
               <p class="mu text-sm">Passionné par le développement web</p>
             </div>
-
           </div>
 
           <div class="space-y-3 leading-relaxed text-sm md:text-base">
-
             <p>
               J’ai validé ma <strong class="t">Licence 2 en Génie Informatique</strong>
               à l’UNIPRO et je poursuis actuellement mon parcours en
@@ -361,7 +341,7 @@
 
             <p>
               Mes deux expériences en stage, mes projets académiques et
-              personnels ainsi que mes participations à différents événements
+              personnels ainsi que ma participation à différents événements
               m’ont permis d’acquérir une première expérience concrète dans
               le développement web.
             </p>
@@ -379,10 +359,8 @@
               motivé par l’apprentissage, la pratique et la possibilité de
               participer à des projets réels.
             </p>
-
           </div>
 
-          <!-- TECHNOLOGIES -->
           <div class="flex flex-wrap gap-2 mt-6">
             <span class="chip">React.js</span>
             <span class="chip">TypeScript</span>
@@ -392,36 +370,21 @@
           </div>
 
           <div class="mt-6 flex flex-wrap gap-3">
-
-            <a
-              href="https://www.sencampus.com/etablissement/unipro-dakar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-g">
+            <a href="https://www.sencampus.com/etablissement/unipro-dakar/" target="_blank" rel="noopener noreferrer" class="btn btn-g">
               <i data-lucide="graduation-cap" class="w-4 h-4 mr-2" aria-hidden="true"></i> UNIPRO
             </a>
-
-            <a
-              href="mon_cv/CV Abdou.W.K.fullstack.pdf"
-              download
-              class="btn btn-p">
+            <a href="mon_cv/CV Abdou.W.K.fullstack.pdf" download class="btn btn-p">
               <i data-lucide="file-down" class="w-4 h-4 mr-2" aria-hidden="true"></i> Télécharger mon CV
             </a>
-
           </div>
 
         </div>
-
       </div>
-
     </div>
-
   </section>
 
   <!-- ================= FORMATION ================= -->
-
   <section id="formation" class="sec bg-b">
-
     <div class="wrap">
 
       <div class="head" style="margin-bottom:2rem;">
@@ -451,15 +414,11 @@
         </div>
 
       </div>
-
     </div>
-
   </section>
 
-  <!-- ================= EXPERIENCE ================= -->
-
+  <!-- ================= EXPÉRIENCE ================= -->
   <section id="experience" class="sec bg-a">
-
     <div class="wrap">
 
       <div class="head" style="margin-bottom:2rem;">
@@ -469,64 +428,45 @@
 
       <div class="exp-grid">
 
-        <!-- ================= TGI 2026 ================= -->
-
+        <!-- TGI 2026 -->
         <article class="card exp">
-
           <div class="exp-top">
             <span class="year">2026</span>
           </div>
 
-          <h3>Développeur Web / Backend</h3>
+          <h3>Stagiaire – Système de pointage des étudiants</h3>
 
-          <a
-            href="https://sn.africabz.com/dakar/tgi-entreprise-informatique-434313"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="exp-co">
-            TGI ↗
+          <a href="https://sn.africabz.com/dakar/tgi-entreprise-informatique-434313" target="_blank" rel="noopener noreferrer" class="exp-co">
+            TGI <span aria-hidden="true">↗</span><span class="sr-only">(s’ouvre dans un nouvel onglet)</span>
           </a>
 
-          <p class="exp-sub">Développement Web &amp; Backend</p>
+          <p class="exp-sub">Développement Web &amp; Base de données</p>
 
           <ul>
-            <li><span>Développement d’interfaces avec React.js et TypeScript.</span></li>
-            <li><span>Conception et intégration d’API avec NestJS et Node.js.</span></li>
-            <li><span>Gestion des données avec MySQL et TypeORM.</span></li>
-            <li><span>Participation au développement et à l’organisation du code en équipe.</span></li>
+            <li><span>Création des interfaces du système de pointage.</span></li>
+            <li><span>Développement des fonctionnalités de l’application.</span></li>
+            <li><span>Gestion des données avec MySQL.</span></li>
+            <li><span>Tests à partir de photos de cartes d’étudiants.</span></li>
           </ul>
 
           <div class="exp-foot">
-            <span class="chip">React.js</span>
-            <span class="chip">TypeScript</span>
-            <span class="chip">NestJS</span>
-            <span class="chip">Node.js</span>
+            <span class="chip">Python</span>
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
             <span class="chip">MySQL</span>
-            <span class="chip">TypeORM</span>
-            <span class="chip chip-n">API REST</span>
-            <span class="chip chip-n">Git</span>
-            <span class="chip chip-n">GitHub</span>
-            <span class="chip chip-n">Postman</span>
           </div>
-
         </article>
 
-        <!-- ================= TGI 2025 ================= -->
-
+        <!-- TGI 2025 -->
         <article class="card exp">
-
           <div class="exp-top">
             <span class="year">2025</span>
           </div>
 
           <h3>Stagiaire Support Informatique et Réseau</h3>
 
-          <a
-            href="https://sn.africabz.com/dakar/tgi-entreprise-informatique-434313"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="exp-co">
-            TGI ↗
+          <a href="https://sn.africabz.com/dakar/tgi-entreprise-informatique-434313" target="_blank" rel="noopener noreferrer" class="exp-co">
+            TGI <span aria-hidden="true">↗</span><span class="sr-only">(s’ouvre dans un nouvel onglet)</span>
           </a>
 
           <p class="exp-sub">Support informatique &amp; Réseau</p>
@@ -542,13 +482,10 @@
             <span class="chip chip-n">Réseau</span>
             <span class="chip chip-n">Stage</span>
           </div>
-
         </article>
 
-        <!-- ================= BEN JEDDOU TECHNOLOGIES ================= -->
-
+        <!-- BEN JEDDOU Technologies -->
         <article class="card exp" style="border-color: rgba(212,119,69,.35);">
-
           <div class="exp-top">
             <span class="year">2026–2027</span>
             <span class="live">EN COURS</span>
@@ -556,46 +493,39 @@
 
           <h3>Stagiaire Développeur Full Stack</h3>
 
-          <a
-            href="https://www.linkedin.com/search/results/companies/?keywords=BEN%20JEDDOU%20Technologies"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="exp-co">
-            BEN JEDDOU Technologies ↗
+          <a href="https://www.linkedin.com/search/results/companies/?keywords=BEN%20JEDDOU%20Technologies" target="_blank" rel="noopener noreferrer" class="exp-co">
+            BEN JEDDOU Technologies <span aria-hidden="true">↗</span><span class="sr-only">(s’ouvre dans un nouvel onglet)</span>
           </a>
 
           <p class="exp-sub">ERP Cloud SaaS multi-entreprises</p>
 
           <ul>
-            <li><span>Conception  ERP Cloud SaaS multi-entreprises.</span></li>
-            <li><span>Préparation de l’architecture technique et de la structure du projet.</span></li>
-            <li><span>Conception des modules de gestion et de facturation.</span></li>
-            <li><span>Travail à distance.</span></li>
+            <li><span>Analyse des besoins pour un ERP Cloud SaaS multi-entreprises.</span></li>
+            <li><span>Préparation de l’architecture technique.</span></li>
+            <li><span>Structuration du frontend et du backend.</span></li>
+            <li><span>Mise en place de l’environnement de développement.</span></li>
+            <li><span>Préparation de l’authentification et de la configuration MySQL.</span></li>
+            <li><span>Stage réalisé à distance.</span></li>
           </ul>
 
           <div class="exp-foot">
-
             <span class="chip chip-n">ERP</span>
             <span class="chip chip-n">SaaS</span>
             <span class="chip">React.js</span>
             <span class="chip">TypeScript</span>
             <span class="chip">NestJS</span>
             <span class="chip">Node.js</span>
+            <span class="chip">MySQL</span>
             <span class="chip chip-n">Stage à distance</span>
           </div>
-
         </article>
 
       </div>
-
     </div>
-
   </section>
 
-  <!-- ================= COMPETENCES ================= -->
-
+  <!-- ================= COMPÉTENCES ================= -->
   <section id="competences" class="sec bg-b">
-
     <div class="wrap">
 
       <div class="head" style="margin-bottom:2rem;">
@@ -603,78 +533,109 @@
         <h2 class="h2">Compétences</h2>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
+      <div id="skillsList" class="grid md:grid-cols-2 gap-4">
 
-        <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/html-five.svg" alt="HTML5" class="h-12 mx-auto">
-          <p>HTML5</p>
+        <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/html-five.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">HTML5</span><span class="lvl-pct">85%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en HTML5" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85"><div class="lvl-fill" style="--lvl:85%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/css-svgrepo-com.svg" alt="CSS3" class="h-12 mx-auto">
-          <p>CSS3</p>
+        <a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/css-svgrepo-com.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">CSS3</span><span class="lvl-pct">80%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en CSS3" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"><div class="lvl-fill" style="--lvl:80%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/javascript.svg" alt="JavaScript" class="h-12 mx-auto">
-          <p>JavaScript</p>
+        <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/tailwind.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">Tailwind CSS</span><span class="lvl-pct">75%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en Tailwind CSS" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75"><div class="lvl-fill" style="--lvl:75%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/react.svg" alt="React" class="h-12 mx-auto">
-          <p>React</p>
+        <a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/sql-database-generic.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">SQL</span><span class="lvl-pct">70%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en SQL" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"><div class="lvl-fill" style="--lvl:70%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://nestjs.com/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/NestJS.svg" alt="NestJS" class="h-12 mx-auto">
-          <p>NestJS</p>
+        <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/javascript.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">JavaScript</span><span class="lvl-pct">65%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en JavaScript" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"><div class="lvl-fill" style="--lvl:65%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/mysql-logo.svg" alt="MySQL" class="h-12 mx-auto">
-          <p>MySQL</p>
+        <a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/react.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">React</span><span class="lvl-pct">65%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en React" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"><div class="lvl-fill" style="--lvl:65%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://www.oracle.com/database/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/sql-database-generic.svg" alt="SQL" class="h-12 mx-auto">
-          <p>SQL</p>
+        <a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/mysql-logo.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">MySQL</span><span class="lvl-pct">65%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en MySQL" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"><div class="lvl-fill" style="--lvl:65%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://docs.oracle.com/en/java/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/java.svg" alt="Java" class="h-12 mx-auto">
-          <p>Java</p>
+        <a href="https://nestjs.com/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/NestJS.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">NestJS</span><span class="lvl-pct">55%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en NestJS" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55"><div class="lvl-fill" style="--lvl:55%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/python-svgrepo-com.svg" alt="Python" class="h-12 mx-auto">
-          <p>Python</p>
+        <a href="https://docs.oracle.com/en/java/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/java.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">Java</span><span class="lvl-pct">45%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en Java" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45"><div class="lvl-fill" style="--lvl:45%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://en.cppreference.com/w/c" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/c-svgrepo-com.svg" alt="C" class="h-12 mx-auto">
-          <p>C</p>
+        <a href="https://en.cppreference.com/w/c" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/c-svgrepo-com.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">C</span><span class="lvl-pct">45%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en C" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45"><div class="lvl-fill" style="--lvl:45%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://v2.tailwindcss.com/docs" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/tailwind.svg" alt="Tailwind CSS" class="h-12 mx-auto">
-          <p>Tailwind</p>
+        <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/python-svgrepo-com.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">Python</span><span class="lvl-pct">40%</span></div>
+            <div class="lvl-track" role="progressbar" aria-label="Niveau en Python" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><div class="lvl-fill" style="--lvl:40%;"></div></div>
+          </div>
         </a>
 
-        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="skill-card">
-          <img src="icone_image/github.svg" alt="GitHub" class="h-12 mx-auto">
-          <p>GitHub</p>
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="lvl-row">
+          <img src="icone_image/github.svg" alt="" loading="lazy" decoding="async" class="lvl-icon">
+          <div class="lvl-body">
+            <div class="lvl-top"><span class="lvl-name">GitHub</span><span class="mu">Versionnage et dépôts</span></div>
+          </div>
         </a>
 
       </div>
-
     </div>
-
   </section>
 
   <!-- ================= SERVICES ================= -->
-
   <section id="services" class="sec bg-a">
-
     <div class="wrap">
 
       <div class="head" style="margin-bottom:2.5rem;">
@@ -688,14 +649,14 @@
 
       <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- FRONTEND -->
-        <div class="card group p-7">
-          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+        <!-- Frontend -->
+        <div class="card p-7">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
                style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);"><i data-lucide="panels-top-left" class="w-7 h-7 m" aria-hidden="true"></i></div>
           <p class="m text-xs font-semibold uppercase tracking-wider mt-6">01 — Frontend</p>
           <h3 class="text-xl font-bold t mt-2">Développement Web Frontend</h3>
           <p class="mu text-sm leading-relaxed mt-4">
-            Création d'interfaces web modernes, responsives et faciles
+            Création d’interfaces web modernes, responsives et faciles
             à utiliser, adaptées aux ordinateurs, tablettes et mobiles.
           </p>
           <div class="flex flex-wrap gap-2 mt-5">
@@ -707,16 +668,16 @@
           </div>
         </div>
 
-        <!-- BACKEND -->
-        <div class="card group p-7">
-          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+        <!-- Backend -->
+        <div class="card p-7">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
                style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);"><i data-lucide="server-cog" class="w-7 h-7 m" aria-hidden="true"></i></div>
           <p class="m text-xs font-semibold uppercase tracking-wider mt-6">02 — Backend</p>
           <h3 class="text-xl font-bold t mt-2">Développement Web Backend</h3>
           <p class="mu text-sm leading-relaxed mt-4">
-            Développement d'API et de fonctionnalités serveur pour
+            Développement d’API et de fonctionnalités serveur pour
             gérer les données, les utilisateurs et la logique métier
-            d'une application.
+            d’une application.
           </p>
           <div class="flex flex-wrap gap-2 mt-5">
             <span class="chip chip-n">Node.js</span>
@@ -727,14 +688,14 @@
           </div>
         </div>
 
-        <!-- MOBILE -->
-        <div class="card group p-7">
-          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+        <!-- Mobile -->
+        <div class="card p-7">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
                style="background: rgba(142,214,197,.1); border: 1px solid rgba(142,214,197,.22);"><i data-lucide="smartphone" class="w-7 h-7 m" aria-hidden="true"></i></div>
           <p class="m text-xs font-semibold uppercase tracking-wider mt-6">03 — Mobile</p>
           <h3 class="text-xl font-bold t mt-2">Développement Mobile</h3>
           <p class="mu text-sm leading-relaxed mt-4">
-            Développement d'applications mobiles avec React Native
+            Développement d’applications mobiles avec React Native
             et Expo, avec des interfaces adaptées aux smartphones.
           </p>
           <div class="flex flex-wrap gap-2 mt-5">
@@ -747,34 +708,29 @@
 
       </div>
 
-      <!-- FULL STACK -->
+      <!-- Full Stack -->
       <div class="static-card mt-6 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6"
            style="border-color: rgba(212,119,69,.3); background: var(--petrol);">
-
         <div>
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center m" style="background: rgba(142,214,197,.12);"><i data-lucide="laptop" class="w-5 h-5" aria-hidden="true"></i></div>
             <h3 class="text-xl font-bold t">Développement Full Stack</h3>
           </div>
           <p class="mu text-sm mt-3 max-w-2xl">
-            Je peux intervenir sur l'ensemble d'un projet :
+            Je peux intervenir sur l’ensemble d’un projet :
             interface utilisateur, backend, API et base de données,
-            afin de construire une application complète et fonctionelle.
+            afin de construire une application complète et fonctionnelle.
           </p>
         </div>
 
-        <a href="#contact" class="btn btn-p shrink-0"><i data-lucide="message-circle" class="w-4 h-4 mr-2" aria-hidden="true"></i>Discuter d'un projet</a>
-
+        <a href="#contact" class="btn btn-p shrink-0"><i data-lucide="message-circle" class="w-4 h-4 mr-2" aria-hidden="true"></i>Discuter d’un projet</a>
       </div>
 
     </div>
-
   </section>
 
   <!-- ================= PROJETS ================= -->
-
   <section id="projets" class="sec bg-b">
-
     <div class="max-w-7xl mx-auto">
 
       <div class="head" style="margin-bottom:2.5rem;">
@@ -783,8 +739,7 @@
         <p class="mu text-sm mt-2">Projets académiques et personnels</p>
       </div>
 
-      <!-- ================= PROJETS 2026 ================= -->
-
+      <!-- Projets 2026 -->
       <div class="mb-12">
 
         <div class="flex items-center flex-wrap gap-3 mb-5">
@@ -795,97 +750,86 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
 
-          <!-- KAAY NIOU DIANG -->
+          <!-- Kaay Niou Diang -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/kaay niou diang.png" alt="Kaay Niou Diang" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/kaay niou diang.png" alt="Aperçu du projet Kaay Niou Diang" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-a">Académique</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Kaay Niou Diang</h3>
-              <p class="m text-xs mt-1 mb-4">React / NestJS / MySQL</p>
+              <p class="m text-xs mt-1 mb-2">React / NestJS / MySQL</p>
+              <p class="mu text-sm leading-relaxed mb-4">Plateforme d’e-learning réalisée en projet académique : interface React, API NestJS et base de données MySQL.</p>
               <div class="flex gap-2 mt-auto">
-                <a href="https://e-learning-xi-blush.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-p btn-sm flex-1">Site</a>
-                <a href="https://github.com/koitadimo12-oss/E-learning" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
+                <a href="https://e-learning-xi-blush.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-p btn-sm flex-1" aria-label="Voir le site Kaay Niou Diang">Site</a>
+                <a href="https://github.com/koitadimo12-oss/E-learning" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1" aria-label="Voir le code de Kaay Niou Diang">Code</a>
               </div>
             </div>
           </div>
 
-          <!-- DIAME DIALLO -->
+          <!-- Diame Diallo -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/diame-diallo.png" alt="Site Immobilier Diame Diallo" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/diame-diallo.png" alt="Aperçu du site immobilier Diame Diallo" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-p">Personnel</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Diame Diallo</h3>
-              <p class="m text-xs mt-1 mb-4">React</p>
+              <p class="m text-xs mt-1 mb-2">React</p>
+              <p class="mu text-sm leading-relaxed mb-4">Site immobilier réalisé avec React, avec une interface moderne et adaptée à tous les écrans.</p>
               <div class="flex gap-2 mt-auto">
-                <a href="https://diamediallo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-p btn-sm flex-1">Site</a>
-                <a href="https://github.com/koitadimo12-oss/diamediallo" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
+                <a href="https://diamediallo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-p btn-sm flex-1" aria-label="Voir le site Diame Diallo">Site</a>
+                <a href="https://github.com/koitadimo12-oss/diamediallo" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1" aria-label="Voir le code de Diame Diallo">Code</a>
               </div>
             </div>
           </div>
 
+          <!-- Gestion de contacts -->
+          <div class="project-card card flex flex-col overflow-hidden">
+            <div class="relative h-48 overflow-hidden flex items-center justify-center" style="background: var(--bg);">
+              <img
+                src="image_projet_et_moi/Gestion-de-contact.png"
+                alt="Aperçu de l’application de gestion de contacts"
+                loading="lazy" decoding="async"
+                class="project-img w-full h-full object-contain rounded-lg"
+                style="transform: scale(1.25);">
+              <span class="tag-p">Personnel</span>
+            </div>
+            <div class="p-4 flex flex-col flex-1">
+              <h3 class="font-bold text-lg t">Gestion de contacts</h3>
+              <p class="m text-xs mt-1 mb-2">React Native / Expo</p>
+              <p class="mu text-sm leading-relaxed mb-4">Application mobile de gestion de contacts développée avec React Native et Expo. Les six écrans sont consultables en images.</p>
+              <div class="grid grid-cols-2 gap-2 mt-auto">
+                <button type="button" id="voirEcransContact" class="btn btn-p btn-sm" aria-haspopup="dialog">
+                  <i data-lucide="images" class="w-4 h-4 mr-1" aria-hidden="true"></i>
+                  Voir les écrans
+                </button>
+                <a href="https://github.com/koitadimo12-oss/React-native-app-gestion-de-contact" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm">
+                  <i data-lucide="github" class="w-4 h-4 mr-1" aria-hidden="true"></i>
+                  Voir le code
+                </a>
+              </div>
+            </div>
+          </div>
 
-<!-- GESTION CONTACT -->
-<div class="project-card card flex flex-col overflow-hidden">
-  <div class="relative h-48 overflow-hidden flex items-center justify-center" style="background: var(--bg);">
-
-    <img
-      src="image_projet_et_moi/Gestion-de-contact.png"
-      alt="Application de gestion de contact"
-      class="project-img w-full h-full object-contain rounded-lg"
-      style="transform: scale(1.25);"
-      loading="lazy"
-    >
-
-    <span class="tag-p">Personnel</span>
-  </div>
-
-  <div class="p-4 flex flex-col flex-1">
-    <h3 class="font-bold text-lg t">Gestion de contacts</h3>
-    <p class="m text-xs mt-1 mb-4">React Native / Expo</p>
-
-    <div class="grid grid-cols-2 gap-2 mt-auto">
-      <button type="button" id="voirEcransContact" class="btn btn-p btn-sm">
-        <i data-lucide="images" class="w-4 h-4 mr-1" aria-hidden="true"></i>
-        Voir les écrans
-      </button>
-
-      <a
-        href="https://github.com/koitadimo12-oss/React-native-app-gestion-de-contact"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-g btn-sm"
-      >
-        <i data-lucide="github" class="w-4 h-4 mr-1" aria-hidden="true"></i>
-        Voir le code
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-
-          <!-- PARRAINAGE -->
+          <!-- Gestion Candidat -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/cour-supreme.png" alt="Parrainage Gestion Candidat" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/cour-supreme.png" alt="Aperçu du projet Parrainage Gestion Candidat" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-a">Académique</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Gestion Candidat</h3>
-              <p class="m text-xs mt-1 mb-4">JS / PHP / HTML / CSS</p>
+              <p class="m text-xs mt-1 mb-2">JS / PHP / HTML / CSS</p>
+              <p class="mu text-sm leading-relaxed mb-4">Application de gestion des candidats dans le cadre d’un parrainage, développée en JavaScript, PHP, HTML et CSS.</p>
               <a href="https://github.com/koitadimo12-oss/parainage-gestion-candidat" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm mt-auto">Voir le code</a>
             </div>
           </div>
 
         </div>
+      </div>
 
-      <!-- ================= PROJETS 2024/2025 ================= -->
-
+      <!-- Projets 2024/2025 -->
       <div>
 
         <div class="flex items-center flex-wrap gap-3 mb-5">
@@ -896,108 +840,110 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
 
-          <!-- JEUX WEB -->
+          <!-- Jeux Web -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/js.png" alt="Jeux Web" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/js.png" alt="Aperçu du projet Jeux Web" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-a">Académique</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Jeux Web</h3>
-              <p class="m text-xs mt-1 mb-4">HTML / CSS / JS</p>
+              <p class="m text-xs mt-1 mb-2">HTML / CSS / JS</p>
+              <p class="mu text-sm leading-relaxed mb-4">Collection de mini-jeux jouables dans le navigateur, réalisée en HTML, CSS et JavaScript.</p>
               <div class="flex gap-2 mt-auto">
-                <a href="projets/mini_jeux_web/index.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
-                <a href="https://github.com/koitadimo12-oss/jeux_web" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
+                <a href="projets/mini_jeux_web/index.html" target="_blank" rel="noopener" class="btn btn-p btn-sm flex-1" aria-label="Voir le site Jeux Web">Site</a>
+                <a href="https://github.com/koitadimo12-oss/jeux_web" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1" aria-label="Voir le code de Jeux Web">Code</a>
               </div>
             </div>
           </div>
 
-          <!-- CALCULATRICE -->
+          <!-- Calculatrice -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/miniCalc.png" alt="Mini Calculatrice" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/miniCalc.png" alt="Aperçu de la Mini Calculatrice" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-p">Personnel</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Mini Calculatrice</h3>
-              <p class="m text-xs mt-1 mb-4">HTML / CSS / JS</p>
+              <p class="m text-xs mt-1 mb-2">HTML / CSS / JS</p>
+              <p class="mu text-sm leading-relaxed mb-4">Calculatrice simple pour les opérations de base, réalisée en HTML, CSS et JavaScript.</p>
               <div class="flex gap-2 mt-auto">
-                <a href="projets/calculatrice_simple/index.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
-                <a href="https://github.com/koitadimo12-oss/calculatriceSimple" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
+                <a href="projets/calculatrice_simple/index.html" target="_blank" rel="noopener" class="btn btn-p btn-sm flex-1" aria-label="Voir le site Mini Calculatrice">Site</a>
+                <a href="https://github.com/koitadimo12-oss/calculatriceSimple" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1" aria-label="Voir le code de Mini Calculatrice">Code</a>
               </div>
             </div>
           </div>
 
-          <!-- SITE IMMOBILIER -->
+          <!-- Site Immobilier -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/immo.png" alt="Site Immobilier" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/immo.png" alt="Aperçu du Site Immobilier" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-a">Académique</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Site Immobilier</h3>
-              <p class="m text-xs mt-1 mb-4">HTML / CSS</p>
+              <p class="m text-xs mt-1 mb-2">HTML / CSS</p>
+              <p class="mu text-sm leading-relaxed mb-4">Site vitrine pour une agence immobilière de luxe, réalisé en HTML et CSS.</p>
               <div class="flex gap-2 mt-auto">
-                <a href="projets/luxe house/lux.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
-                <a href="https://github.com/koitadimo12-oss/immo" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
+                <a href="projets/luxe house/lux.html" target="_blank" rel="noopener" class="btn btn-p btn-sm flex-1" aria-label="Voir le Site Immobilier">Site</a>
+                <a href="https://github.com/koitadimo12-oss/immo" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1" aria-label="Voir le code du Site Immobilier">Code</a>
               </div>
             </div>
           </div>
 
-          <!-- LOGIN -->
+          <!-- Login Page -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/login.png" alt="Login Page" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/login.png" alt="Aperçu de la Login Page" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-p">Personnel</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">Login Page</h3>
-              <p class="m text-xs mt-1 mb-4">HTML / CSS</p>
+              <p class="m text-xs mt-1 mb-2">HTML / CSS</p>
+              <p class="mu text-sm leading-relaxed mb-4">Page de connexion soignée et responsive, réalisée en HTML et CSS.</p>
               <div class="flex gap-2 mt-auto">
-                <a href="projets/login page/index.html" target="_blank" class="btn btn-p btn-sm flex-1">Site</a>
-                <a href="https://github.com/koitadimo12-oss/loginPage" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1">Code</a>
+                <a href="projets/login page/index.html" target="_blank" rel="noopener" class="btn btn-p btn-sm flex-1" aria-label="Voir la Login Page">Site</a>
+                <a href="https://github.com/koitadimo12-oss/loginPage" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm flex-1" aria-label="Voir le code de la Login Page">Code</a>
               </div>
             </div>
           </div>
 
-          <!-- BANK -->
+          <!-- App Bank -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/bank.png" alt="Application bancaire Java" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/bank.png" alt="Aperçu de l’application bancaire Java" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-a">Académique</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">App Bank</h3>
-              <p class="m text-xs mt-1 mb-4">Java</p>
+              <p class="m text-xs mt-1 mb-2">Java</p>
+              <p class="mu text-sm leading-relaxed mb-4">Application bancaire développée en Java dans un cadre académique.</p>
               <a href="https://github.com/koitadimo12-oss/javaBank" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm mt-auto">Voir le dépôt</a>
             </div>
           </div>
 
-          <!-- ELECTION -->
+          <!-- App Election -->
           <div class="project-card card flex flex-col overflow-hidden">
             <div class="relative overflow-hidden">
-              <img src="image_projet_et_moi/election.png" alt="Application Election" class="project-img w-full h-44 object-cover">
+              <img src="image_projet_et_moi/election.png" alt="Aperçu de l’application Election" loading="lazy" decoding="async" class="project-img w-full h-44 object-cover">
               <span class="tag-a">Académique</span>
             </div>
             <div class="p-4 flex flex-col flex-1">
               <h3 class="font-bold text-lg t">App Election</h3>
-              <p class="m text-xs mt-1 mb-4">C</p>
+              <p class="m text-xs mt-1 mb-2">C</p>
+              <p class="mu text-sm leading-relaxed mb-4">Application de gestion d’élection développée en langage C dans un cadre académique.</p>
               <a href="https://github.com/koitadimo12-oss/appElectiom" target="_blank" rel="noopener noreferrer" class="btn btn-g btn-sm mt-auto">Voir le dépôt</a>
             </div>
           </div>
 
         </div>
-
       </div>
 
     </div>
-
   </section>
 
   <!-- ================= CONTACT ================= -->
-
   <section id="contact" class="sec bg-a" style="background: var(--bg2); --card: var(--bg);">
-
     <div class="wrap grid md:grid-cols-2 gap-8 items-center">
 
       <div>
@@ -1014,101 +960,104 @@
 
         <h3 class="text-xl font-bold m mb-5">Contactez-moi</h3>
 
+        <!-- Les attributs id et name sont utilisés par form.js : ne pas les renommer -->
         <form id="contactForm" class="space-y-3">
 
-          <input type="text" name="name" placeholder="Nom" required class="field">
+          <div>
+            <label for="contactName" class="sr-only">Nom</label>
+            <input type="text" id="contactName" name="name" placeholder="Nom" autocomplete="name" required class="field">
+          </div>
 
-          <input type="email" name="email" placeholder="Email" required class="field">
+          <div>
+            <label for="contactEmail" class="sr-only">Adresse e-mail</label>
+            <input type="email" id="contactEmail" name="email" placeholder="Email" autocomplete="email" required class="field">
+          </div>
 
-          <textarea name="message" rows="4" placeholder="Votre message" required class="field"></textarea>
+          <div>
+            <label for="contactMessage" class="sr-only">Votre message</label>
+            <textarea id="contactMessage" name="message" rows="4" placeholder="Votre message" required class="field"></textarea>
+          </div>
 
           <button type="submit" class="btn btn-p w-full" style="border-radius:.6rem;">
             Envoyer le message
           </button>
 
-          <p id="successMessage" class="hidden m text-center text-sm">
+          <p id="successMessage" class="hidden m text-center text-sm" role="status" aria-live="polite">
             Merci, votre message a été envoyé !
           </p>
+
+          <p id="errorMessage" class="hidden form-error text-center text-sm" role="alert"></p>
 
         </form>
 
       </div>
-
     </div>
-
   </section>
 
-  <!-- ================= FOOTER ================= -->
+  </main>
 
+  <!-- ================= FOOTER ================= -->
   <footer class="relative border-t py-10 px-4 overflow-hidden" style="background: var(--bg); border-color: var(--line);">
 
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px" style="background: var(--copper);"></div>
 
     <div class="max-w-6xl mx-auto text-center">
 
-      <h3 class="text-xl md:text-2xl font-bold t">
+      <p class="text-xl md:text-2xl font-bold t">
         Abdou <span class="m">Wahab Koita</span>
-      </h3>
+      </p>
 
       <p class="mu text-sm mt-2">Développeur Full Stack Junior</p>
 
-      <!-- ================= RÉSEAUX ================= -->
-
+      <!-- Réseaux -->
       <div class="flex justify-center items-center gap-4 mt-7">
 
         <a href="https://www.linkedin.com/in/abdou-wahab-koita-64b1943aa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="soc">
-          <img src="icone_image/linkedin.svg" alt="LinkedIn" class="w-7 h-7 object-contain">
+          <img src="icone_image/linkedin.svg" alt="" loading="lazy" class="w-7 h-7 object-contain">
         </a>
 
         <a href="https://wa.me/221775264107" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="soc">
-          <img src="icone_image/whatsapp.svg" alt="WhatsApp" class="w-7 h-7 object-contain">
+          <img src="icone_image/whatsapp.svg" alt="" loading="lazy" class="w-7 h-7 object-contain">
         </a>
 
         <a href="https://www.instagram.com/dimokoita12/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="soc">
-          <img src="icone_image/instagram.svg" alt="Instagram" class="w-7 h-7 object-contain">
+          <img src="icone_image/instagram.svg" alt="" loading="lazy" class="w-7 h-7 object-contain">
         </a>
 
         <a href="https://www.snapchat.com/add/dimokoita23" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" class="soc">
-          <img src="icone_image/snapchat-color.svg" alt="Snapchat" class="w-7 h-7 object-contain">
+          <img src="icone_image/snapchat-color.svg" alt="" loading="lazy" class="w-7 h-7 object-contain">
         </a>
 
       </div>
 
-      <!-- Séparation -->
-
-      <div class="flex items-center justify-center gap-3 mt-8">
+      <div class="flex items-center justify-center gap-3 mt-8" aria-hidden="true">
         <div class="h-px w-16" style="background: var(--line);"></div>
         <div class="w-1.5 h-1.5 rounded-full" style="background: var(--mint);"></div>
         <div class="h-px w-16" style="background: var(--line);"></div>
       </div>
 
-      <!-- Copyright -->
-
       <p class="text-xs mu mt-6">
         © 2026 Abdou Wahab Koita
-        <span class="mx-1" style="opacity:.5;">•</span>
+        <span class="mx-1" style="opacity:.5;" aria-hidden="true">•</span>
         Tous droits réservés.
       </p>
 
     </div>
-
   </footer>
-
-
 
   <!-- Visionneuse des six écrans de l'application -->
   <div id="visionneuseEcrans" class="hidden fixed inset-0 z-[100] p-4 sm:p-6 flex-col items-center justify-center" style="background: rgba(6,31,32,.96);" role="dialog" aria-modal="true" aria-labelledby="titreVisionneuse">
     <div class="w-full max-w-6xl flex items-center justify-between gap-4 mb-4">
       <h2 id="titreVisionneuse" class="text-lg sm:text-xl font-bold t">Gestion de contacts — les 6 écrans</h2>
-      <button type="button" id="retourEcransContact" class="btn btn-p btn-sm shrink-0" aria-label="Fermer l’image et retourner aux projets">← Retour aux projets</button>
+      <button type="button" id="retourEcransContact" class="btn btn-p btn-sm shrink-0">← Retour aux projets</button>
     </div>
     <div class="w-full max-w-6xl min-h-0 flex-1 flex items-center justify-center overflow-auto rounded-xl p-2" style="background: var(--bg2); border: 1px solid var(--line);">
-      <img src="image_projet_et_moi/les-6ecrans.jpg" alt="Aperçu des six écrans de l’application de gestion de contacts" class="block max-w-full max-h-full object-contain" style="max-height: calc(100vh - 125px);">
+      <img src="image_projet_et_moi/les-6ecrans.jpg" alt="Aperçu des six écrans de l’application de gestion de contacts" loading="lazy" class="block max-w-full max-h-full object-contain" style="max-height: calc(100vh - 125px);">
     </div>
     <p class="mt-3 text-center text-sm mu">Cliquez sur « Retour aux projets » ou appuyez sur Échap pour revenir au portfolio.</p>
   </div>
 
-
+  <!-- Visionneuse d'images -->
   <script>
     (function () {
       const openButtons = document.querySelectorAll("#voirEcransContact, [data-ouvrir-ecrans]");
@@ -1139,54 +1088,71 @@
         if (event.target === viewer) closeViewer();
       });
       document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && !viewer.classList.contains("hidden")) closeViewer();
+        if (viewer.classList.contains("hidden")) return;
+        if (event.key === "Escape") closeViewer();
+        // Garde le focus dans la visionneuse (un seul élément focalisable)
+        if (event.key === "Tab") { event.preventDefault(); closeButton.focus(); }
       });
     })();
   </script>
 
+  <!-- Menu mobile + icônes -->
   <script>
     (function () {
       const toggle = document.getElementById("menuToggle");
       const panel = document.getElementById("mainNav");
-      if (!toggle || !panel) return;
 
-      function setMenu(open) {
-        panel.classList.toggle("is-open", open);
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
-        toggle.querySelector(".menu-open-icon")?.classList.toggle("hidden", open);
-        toggle.querySelector(".menu-close-icon")?.classList.toggle("hidden", !open);
+      if (toggle && panel) {
+        const setMenu = function (open) {
+          panel.classList.toggle("is-open", open);
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+          toggle.querySelector(".menu-open-icon")?.classList.toggle("hidden", open);
+          toggle.querySelector(".menu-close-icon")?.classList.toggle("hidden", !open);
+        };
+
+        toggle.addEventListener("click", function () {
+          setMenu(toggle.getAttribute("aria-expanded") !== "true");
+        });
+        panel.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () { setMenu(false); });
+        });
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") setMenu(false);
+        });
+        window.addEventListener("resize", function () {
+          if (window.innerWidth >= 768) setMenu(false);
+        });
       }
 
-      toggle.addEventListener("click", function () {
-        setMenu(toggle.getAttribute("aria-expanded") !== "true");
-      });
-
-      panel.querySelectorAll("a").forEach(function (link) {
-        link.addEventListener("click", function () { setMenu(false); });
-      });
-
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") setMenu(false);
-      });
-
-      window.addEventListener("resize", function () {
-        if (window.innerWidth >= 768) setMenu(false);
+      // Lucide est chargé en defer : on initialise les icônes une fois la page prête
+      window.addEventListener("DOMContentLoaded", function () {
+        if (window.lucide) window.lucide.createIcons();
       });
     })();
-
-    if (window.lucide) lucide.createIcons();
   </script>
 
-  <!-- ================= SCRIPTS ================= -->
+  <!-- Animation des barres de niveau -->
+  <script>
+    (function () {
+      const list = document.getElementById("skillsList");
+      if (!list) return;
+      if (!("IntersectionObserver" in window)) { list.classList.add("lvl-on"); return; }
+      new IntersectionObserver(function (entries, obs) {
+        if (entries[0].isIntersecting) { list.classList.add("lvl-on"); obs.disconnect(); }
+      }, { threshold: 0.2 }).observe(list);
+    })();
+  </script>
 
+  <!-- Formulaire de contact (inchangé) -->
   <script src="form.js"></script>
 
+  <!-- Service Worker -->
   <script>
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js")
-        .then(() => console.log("Service Worker enregistré"))
-        .catch(error => console.log("Erreur Service Worker :", error));
+      navigator.serviceWorker.register("sw.js").catch(function (error) {
+        console.warn("Erreur Service Worker :", error);
+      });
     }
   </script>
 
